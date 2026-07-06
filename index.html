@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scale360 R266 Strategic Planning - India Offsite</title>
+<style>
+  :root {
+    --navy: #1F4E79;
+    --blue: #2E75B6;
+    --light-blue: #D6E4F0;
+    --green: #C6EFCE;
+    --green-text: #276221;
+    --yellow: #FFEB9C;
+    --yellow-text: #7D6608;
+    --red: #FFC7CE;
+    --red-text: #9C0006;
+    --done: #BDD7EE;
+    --done-text: #1F4E79;
+    --gray: #F2F2F2;
+    --gray-text: #595959;
+    --white: #ffffff;
+    --border: #d0d7de;
+    --text: #1a1a1a;
+    --text-muted: #555;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f0f4f8;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--navy);
+    color: white;
+    padding: 20px 32px 16px;
+  }
+  .header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.3px; }
+  .header-meta {
+    display: flex; gap: 20px; margin-top: 8px; flex-wrap: wrap;
+    font-size: 0.82rem; opacity: 0.85;
+  }
+  .header-meta span::before { content: '• '; opacity: 0.6; }
+  .header-meta span:first-child::before { content: ''; }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+
+  /* NAV TABS */
+  .nav {
+    background: var(--blue);
+    display: flex;
+    overflow-x: auto;
+    padding: 0 20px;
+  }
+  .nav button {
+    background: none; border: none; color: rgba(255,255,255,0.75);
+    padding: 12px 18px; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+  }
+  .nav button:hover { color: white; }
+  .nav button.active { color: white; border-bottom-color: white; }
+
+  /* MAIN */
+  .main { padding: 24px 32px; max-width: 1300px; margin: 0 auto; }
+
+  /* CARDS */
+  .card {
+    background: white; border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 16px; overflow: hidden;
+  }
+  .card-header {
+    background: var(--navy); color: white;
+    padding: 12px 18px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer;
+  }
+  .card-header h2 { font-size: 0.95rem; font-weight: 700; }
+  .card-header .meta { font-size: 0.78rem; opacity: 0.8; }
+  .card-body { padding: 0; }
+
+  .section-header {
+    background: var(--blue); color: white;
+    padding: 8px 18px; font-size: 0.82rem; font-weight: 600;
+  }
+
+  /* SESSION ROWS */
+  .session-row {
+    display: grid;
+    grid-template-columns: 110px 60px 1fr;
+    gap: 0;
+    border-bottom: 1px solid #edf0f4;
+    transition: background 0.1s;
+  }
+  .session-row.has-links {
+    grid-template-columns: 110px 60px 1fr 200px;
+  }
+  .session-row.has-links-raci {
+    grid-template-columns: 110px 60px 1fr 140px 180px;
+  }
+  .session-links {
+    padding: 10px 12px;
+    font-size: 0.75rem;
+    border-left: 1px solid #edf0f4;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .session-links .links-label {
+    font-weight: 700; color: var(--blue); font-size: 0.72rem; margin-bottom: 2px;
+  }
+  .session-links a {
+    color: var(--blue); text-decoration: none; font-size: 0.73rem; line-height: 1.4;
+    word-break: break-word;
+  }
+  .session-links a:hover { text-decoration: underline; }
+  .product-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+  .product-tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; }
+  .tag-s360 { background: #D1F5EF; color: #0D4D3E; }
+  .tag-sc  { background: #E2EFDA; color: #375623; }
+  .tag-prom { background: #FFF2CC; color: #7D6608; }
+  .session-links .link-placeholder {
+    color: var(--text-muted); font-style: italic; font-size: 0.72rem;
+  }
+  .session-row:hover { background: #f7f9fc; }
+  .session-row.break-row { background: #fafafa; color: var(--text-muted); }
+  .session-row.recap-row { background: var(--light-blue); }
+
+  .session-time {
+    padding: 12px 14px;
+    font-size: 0.78rem; color: var(--text-muted);
+    border-right: 1px solid #edf0f4;
+    display: flex; align-items: flex-start;
+  }
+  .session-dur {
+    padding: 12px 8px;
+    font-size: 0.75rem; color: var(--text-muted);
+    border-right: 1px solid #edf0f4;
+    display: flex; align-items: flex-start; justify-content: center;
+  }
+  .session-body {
+    padding: 12px 16px;
+  }
+  .session-title { font-size: 0.88rem; font-weight: 600; margin-bottom: 4px; }
+  .session-goals { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+  .session-raci { padding: 10px 12px; display: flex; flex-direction: column; gap: 3px; font-size: 0.73rem; }
+  .raci-item { display: flex; gap: 4px; }
+  .raci-label { font-weight: 700; color: var(--blue); min-width: 14px; }
+  .raci-names { color: var(--text-muted); }
+
+  /* FACILITATOR CHIP */
+  .facilitator { display: inline-flex; align-items: center; gap: 4px; margin-bottom: 5px; }
+  .facilitator-chip {
+    background: var(--light-blue); color: var(--navy);
+    font-size: 0.72rem; font-weight: 700; padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  /* PEOPLE TABLE */
+  .people-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px; padding: 16px;
+  }
+  .person-card {
+    background: var(--light-blue); border-radius: 6px;
+    padding: 10px 14px; display: flex; flex-direction: column; gap: 2px;
+  }
+  .person-name { font-weight: 700; font-size: 0.88rem; color: var(--navy); }
+  .person-code { font-size: 0.72rem; background: var(--navy); color: white; display: inline-block; padding: 1px 7px; border-radius: 8px; width: fit-content; margin-bottom: 2px; }
+  .person-role { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* TOPICS */
+  .topic-section { border-bottom: 1px solid #edf0f4; }
+  .topic-section-header {
+    background: var(--light-blue);
+    padding: 10px 18px;
+    font-weight: 700; font-size: 0.88rem; color: var(--navy);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .topic-section-header .duration {
+    font-size: 0.75rem; font-weight: 500; color: var(--text-muted);
+    background: white; padding: 1px 8px; border-radius: 8px;
+  }
+  .topic-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .topic-table th {
+    background: #f7f9fc; color: var(--text-muted);
+    padding: 7px 14px; text-align: left; font-weight: 600; font-size: 0.75rem;
+    border-bottom: 1px solid #edf0f4;
+  }
+  .topic-table td { padding: 9px 14px; border-bottom: 1px solid #f0f4f8; vertical-align: top; }
+  .topic-table tr:last-child td { border-bottom: none; }
+  .topic-table tr:hover td { background: #f7f9fc; }
+  .owner-chip {
+    background: var(--done); color: var(--done-text);
+    font-size: 0.73rem; font-weight: 600; padding: 2px 8px;
+    border-radius: 8px; display: inline-block; margin: 1px 2px;
+  }
+  .type-chip {
+    font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 8px;
+    display: inline-block;
+  }
+  .type-chip.discuss { background: var(--yellow); color: var(--yellow-text); }
+  .type-chip.decide { background: var(--red); color: var(--red-text); }
+  .type-chip.demo { background: var(--green); color: var(--green-text); }
+  .seeds { font-size: 0.75rem; color: var(--text-muted); font-style: italic; padding: 8px 14px 10px; background: #fafcff; }
+  .seeds ul { padding-left: 16px; }
+  .seeds li { margin-bottom: 3px; }
+
+  /* DECISIONS */
+  .decision-row { display: grid; grid-template-columns: 40px 1fr 160px 120px; border-bottom: 1px solid #edf0f4; }
+  .decision-row:hover { background: #f7f9fc; }
+  .d-num { padding: 12px; font-weight: 700; color: var(--blue); font-size: 0.85rem; border-right: 1px solid #edf0f4; }
+  .d-body { padding: 12px 16px; border-right: 1px solid #edf0f4; }
+  .d-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 4px; }
+  .d-options { font-size: 0.78rem; color: var(--text-muted); }
+  .d-owner { padding: 12px; border-right: 1px solid #edf0f4; }
+  .d-status { padding: 12px; }
+  .status-tbd {
+    background: var(--gray); color: var(--gray-text);
+    font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 8px;
+    display: inline-block;
+  }
+  .status-decided {
+    background: var(--green); color: var(--green-text);
+    font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 8px;
+    display: inline-block;
+  }
+
+  /* PREWORK */
+  .prework-table { width: 100%; border-collapse: collapse; }
+  .prework-table th {
+    background: var(--navy); color: white;
+    padding: 9px 16px; text-align: left; font-size: 0.8rem; font-weight: 600;
+  }
+  .prework-table td { padding: 10px 16px; border-bottom: 1px solid #edf0f4; font-size: 0.83rem; vertical-align: top; }
+  .prework-table tr:last-child td { border-bottom: none; }
+  .prework-table tr:hover td { background: #f7f9fc; }
+  .date-chip {
+    background: var(--yellow); color: var(--yellow-text);
+    font-size: 0.75rem; font-weight: 700; padding: 2px 9px; border-radius: 8px;
+    display: inline-block; white-space: nowrap;
+  }
+  .date-chip.past { background: var(--gray); color: var(--gray-text); }
+  .date-chip.urgent { background: var(--red); color: var(--red-text); }
+
+  /* OVERVIEW */
+  .overview-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; padding: 16px;
+  }
+  .kpi-card {
+    background: var(--light-blue); border-radius: 6px;
+    padding: 14px 16px; text-align: center;
+  }
+  .kpi-num { font-size: 2rem; font-weight: 800; color: var(--navy); line-height: 1; }
+  .kpi-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+
+  .timeline {
+    padding: 16px 20px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .tl-item { display: flex; gap: 14px; align-items: flex-start; }
+  .tl-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--blue); flex-shrink: 0; margin-top: 4px;
+  }
+  .tl-dot.done { background: var(--green-text); }
+  .tl-dot.urgent { background: #c0392b; }
+  .tl-date { font-size: 0.78rem; font-weight: 700; color: var(--navy); min-width: 70px; }
+  .tl-desc { font-size: 0.83rem; }
+
+  .hidden { display: none !important; }
+
+  /* AGENDA LEGEND */
+  .legend { display: flex; gap: 16px; padding: 10px 18px; flex-wrap: wrap; background: #fafafa; border-bottom: 1px solid #edf0f4; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.75rem; color: var(--text-muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* INLINE EDITING */
+  [contenteditable] {
+    border-radius: 3px;
+    outline: none;
+    transition: background 0.12s, box-shadow 0.12s;
+    cursor: text;
+  }
+  [contenteditable]:hover {
+    background: rgba(46, 117, 182, 0.07);
+    box-shadow: 0 0 0 2px rgba(46, 117, 182, 0.18);
+  }
+  [contenteditable]:focus {
+    background: #fff;
+    box-shadow: 0 0 0 2px var(--blue);
+  }
+  [contenteditable].edited {
+    border-left: 3px solid var(--blue);
+    padding-left: 4px;
+  }
+  .edit-hint {
+    position: fixed; bottom: 18px; right: 20px;
+    background: var(--navy); color: white;
+    font-size: 0.75rem; padding: 7px 14px; border-radius: 20px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s;
+    z-index: 999;
+  }
+  .edit-hint.show { opacity: 1; }
+  .add-row-btn {
+    display: block; width: 100%;
+    background: none; border: 1px dashed #ccd6e0;
+    color: var(--blue); font-size: 0.78rem; font-weight: 600;
+    padding: 6px; cursor: pointer; text-align: center;
+    transition: background 0.12s;
+  }
+  .add-row-btn:hover { background: var(--light-blue); }
+  .del-cell {
+    width: 28px; text-align: center; padding: 4px !important;
+    opacity: 0; transition: opacity 0.15s;
+  }
+  tr:hover .del-cell { opacity: 1; }
+  .del-btn {
+    background: none; border: none; color: #c0392b;
+    font-size: 1rem; cursor: pointer; padding: 2px 4px;
+    border-radius: 3px; line-height: 1;
+  }
+  .del-btn:hover { background: var(--red); }
+
+  @media (max-width: 700px) {
+    .main { padding: 16px; }
+    .session-row { grid-template-columns: 90px 50px 1fr; }
+    .session-raci { display: none; }
+    .decision-row { grid-template-columns: 40px 1fr; }
+    .d-owner, .d-status { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Scale360 R266 Strategic Planning - India Offsite<span class="badge">DRAFT</span></h1>
+  <div class="header-meta">
+    <span>Jul 22–24, 2026 · Salesforce Hyderabad + Google Meet</span>
+    <span>8:30 AM – 5:00 PM IST</span>
+    <span>TPM: Betty Yip</span>
+    <span>Agenda and Artifacts deadline: Jul 20, 2026</span>
+    <span>Topics deadline: Jul 10, 2026</span>
+  </div>
+</div>
+
+<nav class="nav">
+
+  <button class="active" onclick="showPage('overview')">Overview</button>
+  <button onclick="saveEdits()" style="margin-left:auto; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.4); border-radius:6px; color:white; font-size:0.8rem; font-weight:600; padding:6px 14px; cursor:pointer;" title="Download current page with all edits baked in">💾 Save Edits</button>
+  <button onclick="showPage('day1')">Day 1 — Headless &amp; InApp</button>
+  <button onclick="showPage('day2')">Day 2 — Product Launch to GA</button>
+  <button onclick="showPage('day3')">Day 3 — Outcomes &amp; Plan Quality</button>
+  <button onclick="showPage('topics')">Call for Topics</button>
+  <button onclick="showPage('decisions')">Decision Log</button>
+  <button onclick="showPage('prework')">Pre-Work</button>
+  <button onclick="showPage('people')">People &amp; RACI</button>
+</nav>
+
+<div class="main">
+
+<!-- ===== OVERVIEW ===== -->
+<div id="overview" class="page active">
+  <div class="card">
+    <div class="card-header" style="cursor:default">
+      <h2 spellcheck="false">Workshop Overview</h2>
+      <span class="meta" spellcheck="false">R266 / Dreamforce — Sep 15, 2026</span>
+    </div>
+    <div class="overview-grid">
+      <div class="kpi-card">
+        <div class="kpi-num" spellcheck="false">3</div>
+        <div class="kpi-label" spellcheck="false">Planning Days</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num" spellcheck="false">11</div>
+        <div class="kpi-label" spellcheck="false">Topics</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-num" spellcheck="false">Sep 15, 2026</div>
+        <div class="kpi-label" spellcheck="false">Dreamforce Target</div>
+      </div>
+      <div class="kpi-card" style="background:#fff3cd;">
+        <div class="kpi-num" id="dfCountdown" style="color:#7D6608;" spellcheck="false">76</div>
+        <div class="kpi-label" style="color:#7D6608;" spellcheck="false">Days to Dreamforce</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default"><h2 spellcheck="false">Key Topics</h2></div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap:0;">
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false">1. Headless Experience <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1 hr</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false" class="">Align on portfolio-wide Headless 360 experience and&nbsp;<span style="font-size: 12.48px;">specific use cases&nbsp;</span>across Scale360, ProM, and Scale Center. MCP and platform infrastructure considerations.</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Kent</span><span class="owner-chip">Ravi</span><span class="owner-chip">Samir</span><span class="owner-chip">Paymon</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span> <span class="product-tag tag-sc">Scale Center</span> <span class="product-tag tag-prom">ProM</span></div>
+        <div style="margin-top:5px;"><span style="font-size:0.69rem; font-weight:700; color:var(--navy);">⚡ Decisions:</span> <span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Sri</span><span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Karishma</span><span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Laksh</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4; border-left:3px solid var(--blue);">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false">1.1 In-App Experience <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1 hr</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false">Define which features to automate and deliver proactively to users within the Scale360 product experience.</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Samir</span><span class="owner-chip">Dan Donovan</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false" class="">2. ProM &amp; Scale Center Migration &amp; EOL to Scale360&nbsp;<span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1.5 hrs</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false" class="">Align on 12-month LRP and recommendations for migrating ProM and Scale Center customers to Scale360, including staffing, feature timelines, and EOL dates.</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Kent</span><span class="owner-chip">Ravi</span><span class="owner-chip">Auro</span><span class="owner-chip">Laurent</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span> <span class="product-tag tag-sc">Scale Center</span> <span class="product-tag tag-prom">ProM</span></div>
+        <div style="margin-top:5px;"><span style="font-size:0.69rem; font-weight:700; color:var(--navy);">⚡ Decisions:</span> <span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Sri</span><span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Karishma</span><span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Laksh</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false">3. Basic &amp; Elite Scale360 Product <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1 hr</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false" class="">Product feature scope to inform product packaging and customer eligibility and review options and recommendations.</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Ravi</span><span class="owner-chip">Kent</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span></div>
+        <div style="margin-top:5px;"><span style="font-size:0.69rem; font-weight:700; color:var(--navy);">⚡ Decisions:</span> <span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Sri</span><span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Karishma</span><span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Laksh</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false">4. Internal Support / CSM <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1 hr</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false" class="">Proposal for the Scale360 internal product experience for internal users and CSMs, drawing on Scale Center and ProM learnings.</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Ravi</span><span class="owner-chip">Kent</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span></div>
+        <div style="margin-top:5px;"><span style="font-size:0.69rem; font-weight:700; color:var(--navy);">⚡ Decisions:</span> <span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Sri</span><span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Karishma</span><span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Laksh</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false">5. DF Scope / Product Launch to GA <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1.5 hrs</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false" class="">Confirm what is in scope for Dreamforce Sep 15. Align on committed vs. stretch deliverables and make Dreamforce scope decisions. Outline of product launch plan and what it takes to GA a product. Assign engineering work and ownership across multiple work streams (security, legal, etc).</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Ravi</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false">6. Pricing &amp; CTS, Opt-In, AI-Based <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1 hr</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false" class="">Decide Agentforce vs. Claude AI backend, CTS rationalization, Pricing (Elite, Signature) and customer experience for customers who have not opted in to Agentforce.</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Paymon</span><span class="owner-chip">Ravi</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span></div>
+        <div style="margin-top:5px;"><span style="font-size:0.69rem; font-weight:700; color:var(--navy);">⚡ Decisions:</span> <span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Sri</span><span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Karishma</span><span style="background:var(--navy); color:white; font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Laksh</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false">7. RCA Agent <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1 hr</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false" class="">Align on pilot exit criteria, and engineering work in support of pilot.</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Ravi</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false">8. Alerting &amp; Alert Enrichment <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1 hr</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false" class="">Discuss enrichment gap between ProM and Scale Center and plan for enrichment for Scale360 leveraging Events Platform. Tools to migrate from current Argus to Events platform.</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Laurent</span><span class="owner-chip">Paymon</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false" class="">9. Multi-Org &amp; Multi-Cloud <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1 hr</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false" class="">Review the UI experience shared by Samir. Discuss and decide on the product direction and scope for FY27.&nbsp;</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Paymon</span><span class="owner-chip">Samir</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false">10. Architecture Comparison <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1 hr</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false">Current architecture vs. new architecture comparison. Helpful for migration and EOL discussions.</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Auro</span><span class="owner-chip">Paymon</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span></div>
+      </div>
+      <div style="padding:14px 18px; border-bottom:1px solid #edf0f4; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.85rem; margin-bottom:6px;" spellcheck="false">11. UX Session <span style="font-weight:400; color:var(--text-muted); font-size:0.78rem;">— 1 hr</span></div>
+        <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.6;" spellcheck="false">UX discussion and planning session.</div>
+        <div style="margin-top:6px;" spellcheck="false"><span class="owner-chip">Samir</span><span style="background:#e8f4fb; color:var(--blue); font-size:0.7rem; font-weight:600; padding:1px 7px; border-radius:8px; display:inline-block; margin:1px 2px;">Dan Donovan (optional)</span></div>
+        <div style="margin-top:5px;"><span class="product-tag tag-s360">Scale360</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default"><h2 spellcheck="false">3-Day Structure</h2></div>
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:0;">
+      <div style="padding:16px; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:8px;" spellcheck="false">Day 1 — Headless &amp; InApp Experience - Basic/Elite (6.5 hrs)</div>
+        <ul style="font-size:0.82rem; color:var(--text-muted); padding-left:16px; line-height:1.9;">
+          <li spellcheck="false">Welcome &amp; R266 goals</li>
+          <li spellcheck="false">Topic 1 — Headless Experience (1 hr)</li>
+          <li spellcheck="false">Topic 1.1 — In-App Experience (1 hr)</li>
+          <li spellcheck="false">Topic 3 — Basic &amp; Elite Scale360 Product (1 hr)</li>
+          <li spellcheck="false">Topic 7 — RCA Agent (1 hr)</li>
+          <li spellcheck="false">Topic 8 — Alerting &amp; Alert Enrichment (1 hr)</li>
+          <li spellcheck="false">Topic 11 — UX Session (1 hr)</li>
+          <li spellcheck="false">Day 1 recap &amp; actions</li>
+        </ul>
+      </div>
+      <div style="padding:16px; border-right:1px solid #edf0f4;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:8px;" spellcheck="false">Day 2 — Product Launch to GA (6.5 hrs)</div>
+        <ul style="font-size:0.82rem; color:var(--text-muted); padding-left:16px; line-height:1.9;">
+          <li spellcheck="false">Day 2 Kickoff</li>
+          <li spellcheck="false">Topic 2 — ProM &amp; Scale Center Migration &amp; EOL (1.5 hrs)</li>
+          <li spellcheck="false">Topic 4 — Internal Support / CSM (1 hr)</li>
+          <li spellcheck="false">Topic 5 — DF Scope / Product Launch to GA (1.5 hrs)</li>
+          <li spellcheck="false">Topic 6 — Pricing &amp; CTS, Opt-In, AI-Based (1 hr)</li>
+          <li spellcheck="false">Topic 9 — Multi-Org &amp; Multi-Cloud (1 hr)</li>
+          <li spellcheck="false">Topic 10 — Architecture Comparison (1 hr)</li>
+          <li spellcheck="false">Day 2 recap &amp; actions</li>
+        </ul>
+      </div>
+      <div style="padding:16px;">
+        <div style="font-weight:700; color:var(--navy); font-size:0.9rem; margin-bottom:8px;" spellcheck="false">Day 3 — Outcomes &amp; Plan Quality (3.25 hrs)</div>
+        <ul style="font-size:0.82rem; color:var(--text-muted); padding-left:16px; line-height:1.9;">
+          <li spellcheck="false">Day 3 Kickoff (15m)</li>
+          <li spellcheck="false">Workshop Outcomes Review (1 hr)</li>
+          <li spellcheck="false">Product direction &amp; scope lock</li>
+          <li spellcheck="false">Workstream Planning &amp; Action Items (1.5 hrs)</li>
+          <li spellcheck="false">Close &amp; Next Steps (30m)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default"><h2 spellcheck="false">R266 Key Dates</h2></div>
+    <div class="timeline" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap:0; padding:0;">
+
+      <div style="padding:8px 12px; border-right:1px solid #edf0f4; border-bottom:1px solid #edf0f4;">
+        <div style="font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:2px;">Release Planning</div>
+        <div style="font-size:0.78rem; font-weight:800; color:var(--navy);" spellcheck="false">Aug 3–7 <span style="font-weight:400; font-size:0.75rem; color:var(--text-muted);">(TBD)</span></div>
+      </div>
+
+      <div style="padding:8px 12px; border-right:1px solid #edf0f4; border-bottom:1px solid #edf0f4;">
+        <div style="font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:2px;">2RR Readout</div>
+        <div style="font-size:0.78rem; font-weight:800; color:var(--navy);" spellcheck="false">Aug 20</div>
+        <div style="font-size:0.7rem; color:var(--text-muted); margin-top:1px;" spellcheck="false">HCC 2 Release Roadmap</div>
+      </div>
+
+      <div style="padding:8px 12px; border-right:1px solid #edf0f4; border-bottom:1px solid #edf0f4;">
+        <div style="font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:2px;"><img src="https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2024/11/df-logo-desktop.svg" style="height:11px; vertical-align:middle; margin-right:3px;">Dreamforce</div>
+        <div style="font-size:0.78rem; font-weight:800; color:var(--navy);" spellcheck="false">Sep 15</div>
+        <div style="font-size:0.7rem; color:var(--text-muted); margin-top:1px;" spellcheck="false">DF Closed Pilot target</div>
+      </div>
+
+      <div style="padding:8px 12px; border-right:1px solid #edf0f4; border-bottom:1px solid #edf0f4;">
+        <div style="font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:2px;">R266 FF</div>
+        <div style="font-size:0.78rem; font-weight:800; color:var(--navy);" spellcheck="false">Nov 19</div>
+        <div style="font-size:0.7rem; color:var(--text-muted); margin-top:1px;" spellcheck="false">R266 Feature Freeze</div>
+      </div>
+
+
+<div style="padding:8px 12px; border-right:1px solid #edf0f4; border-bottom:1px solid #edf0f4;">
+        <div style="font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:2px;">R266 RF</div>
+        <div style="font-size:0.78rem; font-weight:800; color:var(--navy);" spellcheck="false">Dec 10</div>
+        <div style="font-size:0.7rem; color:var(--text-muted); margin-top:1px;" spellcheck="false">R266 Release Freeze → GA</div>
+      </div>
+
+      <div style="padding:8px 12px; border-bottom:1px solid #edf0f4;">
+        <div style="font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:2px;">Product GA</div>
+        <div style="font-size:0.78rem; font-weight:800; color:var(--navy);" spellcheck="false">Jan 31, 2027</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== DAY 1 ===== -->
+<div id="day1" class="page">
+  <div class="card">
+    <div class="card-header" style="cursor:default">
+      <h2 spellcheck="false">Day 1 — Headless &amp; InApp Experience - Basic/Elite</h2>
+      <span class="meta" spellcheck="false">Tuesday, July 22, 2026 · 8:30 AM – 5:00 PM IST</span>
+    </div>
+    <div class="legend">
+      <div class="legend-item" spellcheck="false"><div class="legend-dot" style="background:var(--light-blue)"></div> Recap / Admin</div>
+      <div class="legend-item" spellcheck="false"><div class="legend-dot" style="background:#fafafa"></div> Break / Lunch</div>
+      <div class="legend-item"><div class="legend-item" style="font-size:0.75rem" spellcheck="false">R = Responsible · A = Accountable · C = Consulted · I = Informed</div></div>
+    </div>
+    <div class="card-body">
+      <div class="session-row recap-row has-links">
+        <div class="session-time" spellcheck="false">8:30–9:00 AM</div>
+        <div class="session-dur" spellcheck="false">30m</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">1.1 · Welcome &amp; Planning Kickoff</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Sri</span><span class="facilitator-chip">Karishma</span><span class="facilitator-chip">Laksh</span><span class="facilitator-chip">Betty</span></div>
+          <div class="session-goals" spellcheck="false">Welcome message, purpose and agenda for the next several days. Align on R266 product goals and success criteria. Review key dates: Sep 15 DF.
+            <ul style="margin:6px 0 0 0; padding-left:16px; line-height:1.6;">
+              <li><strong>Outcomes:</strong> Product Strategy &amp; Alignment, R266 Deliverable Roadmap and Agentforce Claude work allocation</li>
+            </ul>
+          </div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">No artifacts required</span></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">9:00–10:00 AM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">1.2 · Topic 1 — Headless Experience</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Kent</span><span class="facilitator-chip">Ravi</span></div>
+          <div class="session-goals" spellcheck="false">Align on portfolio-wide Headless 360 experience and specific use cases across Scale360, ProM, and Scale Center.
+            <ul style="margin:6px 0 0 0; padding-left:16px; line-height:1.6;">
+              <li><strong>Product scope &amp; prioritized use cases</strong> across Headless portfolio (ProM, Scale360, Scale Center) + CATT early feedback — <em>Kent, Mayuresh, Ravi</em></li>
+              <li><strong>What to automate for users</strong> and what to deliver proactively — <em>Samir</em></li>
+              <li><strong>MCP Servers &amp; Platform Infrastructure</strong> — <em>Paymon</em></li>
+            </ul>
+          </div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span><span class="product-tag tag-sc">Scale Center</span><span class="product-tag tag-prom">ProM</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">Product Scope doc (Kent/Ravi/Mayuresh)</span><span class="link-placeholder">CATT Feedback report</span></div>
+      </div>
+      <div class="session-row break-row has-links">
+        <div class="session-time" spellcheck="false">10:00–10:15 AM</div>
+        <div class="session-dur" spellcheck="false">15m</div>
+        <div class="session-body"><div class="session-title" style="color:var(--text-muted)" spellcheck="false">☕ BREAK</div></div>
+        <div class="session-links"></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">10:15–11:15 AM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">1.3 · Topic 1.1 — In-App Experience</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Samir</span></div>
+          <div class="session-goals" spellcheck="false">Define which features to automate and deliver proactively to users within the Scale360 product experience.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">No artifacts specified</span></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">11:15 AM–12:15 PM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">1.4 · Topic 3 — Basic &amp; Elite Scale360 Product</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Ravi</span><span class="facilitator-chip">Kent</span></div>
+          <div class="session-goals" spellcheck="false">Product feature scope to inform product packaging and customer eligibility. Review options and recommendations.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">Options &amp; recommendations doc (Ravi/Kent)</span></div>
+      </div>
+      <div class="session-row break-row has-links">
+        <div class="session-time" spellcheck="false">12:15–1:15 PM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body"><div class="session-title" style="color:var(--text-muted)" spellcheck="false">🍽 LUNCH</div></div>
+        <div class="session-links"></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">1:15–2:15 PM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">1.5 · Topic 7 — RCA Agent</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Ravi</span></div>
+          <div class="session-goals" spellcheck="false">Align on pilot exit criteria and engineering work in support of pilot.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">Pilot exit criteria doc (Ravi)</span></div>
+      </div>
+      <div class="session-row break-row has-links">
+        <div class="session-time" spellcheck="false">2:15–2:30 PM</div>
+        <div class="session-dur" spellcheck="false">15m</div>
+        <div class="session-body"><div class="session-title" style="color:var(--text-muted)" spellcheck="false">☕ BREAK</div></div>
+        <div class="session-links"></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">2:30–3:30 PM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">1.6 · Topic 8 — Alerting &amp; Alert Enrichment</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Laurent</span><span class="facilitator-chip">Paymon</span></div>
+          <div class="session-goals" spellcheck="false">Discuss enrichment gap between ProM and Scale Center and plan for enrichment for Scale360 leveraging Events Platform. Tools to migrate from current Argus to Events platform.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">No artifacts specified</span></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">3:30–4:30 PM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">1.7 · Topic 11 — UX Session</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Samir</span><span style="background:#e8f4fb; color:var(--blue); font-size:0.72rem; font-weight:600; padding:2px 8px; border-radius:10px; display:inline-block; margin-left:4px;">Dan Donovan (optional)</span></div>
+          <div class="session-goals" spellcheck="false">UX discussion and planning session.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">UX session materials (Samir)</span></div>
+      </div>
+      <div class="session-row recap-row has-links">
+        <div class="session-time" spellcheck="false">4:30–5:00 PM</div>
+        <div class="session-dur" spellcheck="false">30m</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">1.8 · Day 1 Recap &amp; Action Items</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Betty</span></div>
+          <div class="session-goals" spellcheck="false">Capture all open items. Assign owners and due dates. Confirm deadlines. Preview Day 2 agenda.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"></div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DAY 2 ===== -->
+<div id="day2" class="page">
+  <div class="card">
+    <div class="card-header" style="cursor:default">
+      <h2 spellcheck="false">Day 2 — Product Launch to GA</h2>
+      <span class="meta" spellcheck="false">Wednesday, July 23, 2026 · 8:30 AM – 5:00 PM IST</span>
+    </div>
+    <div class="legend">
+      <div class="legend-item" spellcheck="false"><div class="legend-dot" style="background:var(--light-blue)"></div> Recap / Admin</div>
+      <div class="legend-item" spellcheck="false"><div class="legend-dot" style="background:#fafafa"></div> Break / Lunch</div>
+    </div>
+    <div class="card-body">
+      <div class="session-row recap-row has-links">
+        <div class="session-time" spellcheck="false">8:30–8:45 AM</div>
+        <div class="session-dur" spellcheck="false">15m</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">2.1 · Day 2 Kickoff</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Sri</span><span class="facilitator-chip">Karishma</span><span class="facilitator-chip">Laksh</span><span class="facilitator-chip">Betty</span></div>
+          <div class="session-goals" spellcheck="false">Open items from Day 1, priorities for today.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">8:45–10:15 AM</div>
+        <div class="session-dur" spellcheck="false">1.5 hrs</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">2.2 · Topic 2 — ProM &amp; Scale Center Migration &amp; EOL</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Kent</span><span class="facilitator-chip">Ravi</span></div>
+          <div class="session-goals" spellcheck="false">Align on 12-month LRP and recommendations for migrating ProM and Scale Center customers to Scale360, including staffing, feature timelines, and EOL dates.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span><span class="product-tag tag-sc">Scale Center</span><span class="product-tag tag-prom">ProM</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">12-Month LRP findings doc (Kent/Ravi)</span></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">10:15–11:15 AM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">2.3 · Topic 4 — Internal Support / CSM</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Ravi</span><span class="facilitator-chip">Kent</span></div>
+          <div class="session-goals" spellcheck="false">Proposal for the Scale360 internal product experience for internal users and CSMs, drawing on Scale Center and ProM learnings.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">Proposed internal user experience doc (Ravi/Kent)</span></div>
+      </div>
+      <div class="session-row break-row has-links">
+        <div class="session-time" spellcheck="false">11:15 AM–12:15 PM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body"><div class="session-title" style="color:var(--text-muted)" spellcheck="false">🍽 LUNCH</div></div>
+        <div class="session-links"></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">12:15–1:45 PM</div>
+        <div class="session-dur" spellcheck="false">1.5 hrs</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">2.4 · Topic 5 — DF Scope / Product Launch to GA</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Ravi</span></div>
+          <div class="session-goals" spellcheck="false">Confirm what is in scope for Dreamforce Sep 15. Align on committed vs. stretch deliverables. Outline of product launch plan and what it takes to GA a product. Assign engineering work and ownership across multiple work streams (security, legal, etc).</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">DF scope doc</span><span class="link-placeholder">GTM Launch Hub work streams outline (Ravi)</span></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">1:45–2:45 PM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">2.5 · Topic 6 — Pricing &amp; CTS, Opt-In, AI-Based</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Paymon</span><span class="facilitator-chip">Ravi</span></div>
+          <div class="session-goals" spellcheck="false">Decide Agentforce vs. Claude AI backend, CTS rationalization, Pricing (Elite, Signature) and customer experience for customers who have not opted in to Agentforce.
+            <ul style="margin:6px 0 0 0; padding-left:16px; line-height:1.6;">
+              <li><strong>Agentforce vs. Claude</strong> — <em>Paymon</em></li>
+              <li><strong>Opt-in &amp; AI-based customer experience</strong> — how will the experience be for customers who haven't opted in — <em>Ravi</em></li>
+              <li><strong>Pricing &amp; CTS for Basic and Elite</strong> (and are there limits?) — <em>Ravi</em></li>
+            </ul>
+          </div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">Pricing &amp; CTS doc (Ravi)</span><span class="link-placeholder">Customer opt-in POV (Ravi)</span></div>
+      </div>
+      <div class="session-row break-row has-links">
+        <div class="session-time" spellcheck="false">2:45–3:00 PM</div>
+        <div class="session-dur" spellcheck="false">15m</div>
+        <div class="session-body"><div class="session-title" style="color:var(--text-muted)" spellcheck="false">☕ BREAK</div></div>
+        <div class="session-links"></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">3:00–3:45 PM</div>
+        <div class="session-dur" spellcheck="false">45m</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">2.6 · Topic 9 — Multi-Org &amp; Multi-Cloud</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Paymon</span><span class="facilitator-chip">Samir</span></div>
+          <div class="session-goals" spellcheck="false">Review the UI experience shared by Samir. Discuss and decide on the product direction and scope for FY27.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">Multi-Org/Multi-Cloud UI mockups (Samir)</span></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">3:45–4:45 PM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">2.7 · Topic 10 — Architecture Comparison</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Auro</span><span class="facilitator-chip">Paymon</span></div>
+          <div class="session-goals" spellcheck="false">Current architecture vs. new architecture comparison. Helpful for migration and EOL discussions.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">Architecture comparison deck (Auro/Paymon)</span></div>
+      </div>
+      <div class="session-row recap-row has-links">
+        <div class="session-time" spellcheck="false">4:45–5:15 PM</div>
+        <div class="session-dur" spellcheck="false">30m</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">2.8 · Day 2 Recap &amp; Action Items</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Betty</span></div>
+          <div class="session-goals" spellcheck="false">Capture all open items. Confirm decisions made. Preview Day 3 agenda.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DAY 3 ===== -->
+<div id="day3" class="page">
+  <div class="card">
+    <div class="card-header" style="cursor:default">
+      <h2 spellcheck="false">Day 3 — Outcomes &amp; Plan Quality</h2>
+      <span class="meta" spellcheck="false">Thursday, July 24, 2026 · 8:30 AM – 2:30 PM IST</span>
+    </div>
+    <div class="legend">
+      <div class="legend-item" spellcheck="false"><div class="legend-dot" style="background:var(--light-blue)"></div> Recap / Admin</div>
+      <div class="legend-item" spellcheck="false"><div class="legend-dot" style="background:#fafafa"></div> Break / Lunch</div>
+    </div>
+    <div class="card-body">
+      <div class="session-row recap-row has-links">
+        <div class="session-time" spellcheck="false">8:30–8:45 AM</div>
+        <div class="session-dur" spellcheck="false">15m</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">3.1 · Day 3 Kickoff</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Sri</span><span class="facilitator-chip">Karishma</span><span class="facilitator-chip">Laksh</span><span class="facilitator-chip">Betty</span></div>
+          <div class="session-goals" spellcheck="false">Open items from Day 2, priorities for today.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"></div>
+      </div>
+      <div class="session-row has-links" style="background:#fffbf0;">
+        <div class="session-time" spellcheck="false">8:45–9:45 AM</div>
+        <div class="session-dur" spellcheck="false">1 hr</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">3.2 · Workshop Outcomes Review</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Sri</span><span class="facilitator-chip">Karishma</span><span class="facilitator-chip">Laksh</span><span class="facilitator-chip">Betty</span></div>
+          <div class="session-goals" spellcheck="false">Review and finalize workshop outcomes: Product Strategy &amp; Alignment, R266 Deliverable Roadmap and Agentforce Claude work allocation.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">R266 Deliverable Roadmap</span><span class="link-placeholder">Work allocation plan</span></div>
+      </div>
+      <div class="session-row has-links">
+        <div class="session-time" spellcheck="false">9:45–11:15 AM</div>
+        <div class="session-dur" spellcheck="false">1.5 hrs</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">3.3 · Workstream Planning &amp; Action Items</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Betty</span></div>
+          <div class="session-goals" spellcheck="false">Review workstream status and commitments across P1–P6. Confirm engineering ownership, sprint assignments, and delivery targets for R266. Comprehensive action item table: owner, action, due date. No action without a named owner. Confirm async follow-ups for items not closed in session.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"><span class="links-label">📎 Document Links</span><span class="link-placeholder">Workstream tracker</span><span class="link-placeholder">Action items tracker</span></div>
+      </div>
+      <div class="session-row recap-row has-links">
+        <div class="session-time" spellcheck="false">11:15 AM–11:45 AM</div>
+        <div class="session-dur" spellcheck="false">30m</div>
+        <div class="session-body">
+          <div class="session-title" spellcheck="false">3.4 · Close &amp; Next Steps</div>
+          <div class="facilitator" spellcheck="false"><span class="facilitator-chip">Betty</span></div>
+          <div class="session-goals" spellcheck="false">Summarize all decisions made across 3 days. Confirm next sync cadence. Betty to publish action item table and updated workstream tracker by EOD+1.</div>
+          <div class="product-tags"><span class="product-tag tag-s360">Scale360</span></div>
+        </div>
+        <div class="session-links"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOPICS ===== -->
+<div id="topics" class="page">
+  <div style="background:var(--yellow); color:var(--yellow-text); padding:10px 18px; border-radius:6px; font-size:0.83rem; font-weight:600; margin-bottom:14px;" spellcheck="false">
+    📋 Topics deadline: July 10, 2026 — Add your input to the planning doc before this date.
+  </div>
+
+  <div class="card">
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">1. Headless Experience <span class="duration">1 hr</span> <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span> <span class="product-tag tag-sc" style="vertical-align:middle;">Scale Center</span> <span class="product-tag tag-prom" style="vertical-align:middle;">ProM</span></div>
+      <div style="font-size:0.75rem; color:var(--text-muted); padding:6px 18px; background:#fafcff;" spellcheck="false">Covers: embedded React app, headless experience, reimagined RCA homepage, Scale Insights</div>
+      <table class="topic-table">
+        <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Kent</span><span class="owner-chip">Mayuresh</span></td>
+          <td>Overview and description of product scope. Prioritized use cases for entire Headless portfolio (ProM, Scale360, etc)</td>
+          <td>Mayuresh Verma</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Samir</span></td>
+          <td>What would we automate for the user and what would be proactive</td>
+          <td>Sri Dinavahi</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Paymon</span></td>
+          <td>MCP Servers &amp; Platform Infrastructure</td>
+          <td>Sri Dinavahi</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </tbody></table>
+      <div class="topic-section">
+        <div class="topic-section-header" style="background:#e8f4fb; color:var(--blue);" spellcheck="false">1.1 In-App Experience (Scale360) <span class="duration">1 hr</span> <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span></div>
+        <table class="topic-table">
+          <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+          <tr spellcheck="false">
+            <td><span class="owner-chip">Samir</span></td>
+            <td>What would we automate for the user and what could be done proactively</td>
+            <td>Sri Dinavahi, Dan Donovan</td>
+            <td></td><td></td><td></td>
+          </tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">2. ProM &amp; Scale Center Parity &amp; EOL / Migration to Scale360 <span class="duration">1.5 hrs</span> <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span> <span class="product-tag tag-sc" style="vertical-align:middle;">Scale Center</span> <span class="product-tag tag-prom" style="vertical-align:middle;">ProM</span></div>
+      <div style="font-size:0.75rem; color:var(--text-muted); padding:6px 18px; background:#fafcff;" spellcheck="false">Covers: Migration tool and plan, EOL dates, customer transition plan, CSG engagement</div>
+      <table class="topic-table">
+        <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Kent</span><span class="owner-chip">Auro</span><span class="owner-chip">Laurent</span></td>
+          <td>Recommendation on how we should approach Scale360 migration</td>
+          <td>Sri Dinavahi</td>
+          <td><span class="type-chip discuss">Discuss</span> <span class="type-chip decide">Decide</span></td>
+          <td>12-Month LRP Reports and findings; Onboarding customers historically and at scale; ProM customer observability findings</td>
+          <td>Alignment on path forward migration plan</td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">3. Basic &amp; Elite Scale360 Product <span class="duration">1 hr</span> <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span></div>
+      <table class="topic-table">
+        <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Ravi</span><span class="owner-chip">Kent</span></td>
+          <td>Tier definitions, go-to-market strategy</td>
+          <td>Sri</td>
+          <td></td><td></td>
+          <td>Definition of Elite</td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">4. Internal Support / CSM <span class="duration">1 hr</span> <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span></div>
+      <table class="topic-table">
+        <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Ravi</span><span class="owner-chip">Kent</span></td>
+          <td>Internal experience for Customer Success Managers and support teams</td>
+          <td>Sri</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">5. Product Launch to GA <span class="duration">1 hr</span> <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span></div>
+      <table class="topic-table">
+        <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Ravi</span></td>
+          <td>Operational readiness &amp; product launch checklist (200+ items)</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">6. Pricing &amp; CTS, Opt-In, AI-Based <span class="duration">1 hr</span> <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span></div>
+      <table class="topic-table">
+        <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Paymon</span></td>
+          <td>Agentforce vs. Claude</td>
+          <td>Sri</td>
+          <td></td><td></td><td></td>
+        </tr>
+        <tr spellcheck="false">
+          <td></td>
+          <td>Opt-in: experience for customers who haven't opted in; AI-based strategy</td>
+          <td></td>
+          <td><span class="type-chip decide">Decision</span></td>
+          <td></td>
+          <td>POV on customer experience</td>
+        </tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Ravi</span></td>
+          <td>Pricing &amp; CTS</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">7. RCA (Root Cause Analysis Agent) <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span></div>
+      <div style="font-size:0.75rem; color:var(--text-muted); padding:6px 18px; background:#fafcff;" spellcheck="false">Covers: skill-based vs. hardcoded RCA, LLM gateway vs. Agentforce, RCA + Scale Insight unified flow, Java/Python ReAct loop</div>
+      <table class="topic-table">
+        <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Ravi</span></td>
+          <td>Exit criteria for pilot</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">8. Alerting &amp; Alert Enrichment <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span></div>
+      <div style="font-size:0.75rem; color:var(--text-muted); padding:6px 18px; background:#fafcff;" spellcheck="false">Covers: alerting events platform, alert onboarding (15 metrics), UI access gates, Slack notifications, cohort org rollout</div>
+      <table class="topic-table">
+        <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Laurent</span><span class="owner-chip">Paymon</span></td>
+          <td>Plan for getting enrichment for Scale360 platform</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Laurent</span><span class="owner-chip">Paymon</span></td>
+          <td>Additional enrichment from Events platform and what's possible</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+        <tr spellcheck="false">
+          <td><span class="owner-chip">Laurent</span><span class="owner-chip">Paymon</span></td>
+          <td>Tools to migrate current Argus to Events</td>
+          <td></td><td></td><td></td><td></td>
+        </tr>
+      </tbody></table>
+      <div class="seeds">
+        <strong spellcheck="false">Suggested seeds:</strong>
+        <ul>
+          <li spellcheck="false">Alert onboarding (15 metrics): status for 264, what remains for 266?</li>
+          <li spellcheck="false">Alerting enrichment events platform: collaboration between Malik, Plash, Shree — handoff and 266 plan</li>
+          <li spellcheck="false">Warden AI Ops auto-remediation: callback TD from MonCloud — 266 dependency plan</li>
+          <li spellcheck="false">Alert rollout: cohort org access gates, UI testing, broader rollout timeline</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">Multi-Org <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span></div>
+      <div style="font-size:0.75rem; color:var(--text-muted); padding:6px 18px; background:#fafcff;" spellcheck="false">Covers: multi-org support, org-level alerting, cross-org insights, tenant isolation</div>
+      <table class="topic-table">
+        <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+        <tr spellcheck="false"><td><span class="owner-chip">Paymon</span></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody></table>
+      <div class="seeds">
+        <strong spellcheck="false">Suggested seeds:</strong>
+        <ul>
+          <li spellcheck="false">Multi-org alerting: scope for 266 — which alert types, which tenant tiers?</li>
+          <li spellcheck="false">Org throttling and governor limit cases across orgs</li>
+          <li spellcheck="false">Scale Center multi-org data model: right architecture going into 266?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">Multi-Cloud <span class="product-tag tag-s360" style="vertical-align:middle;">Scale360</span></div>
+      <div style="font-size:0.75rem; color:var(--text-muted); padding:6px 18px; background:#fafcff;" spellcheck="false">Covers: multi-cloud support, G2H parity, commercial vs. G2H alerting, Monitoring Cloud dependency</div>
+      <table class="topic-table">
+        <tbody><tr spellcheck="false"><th>Owner</th><th>Topic</th><th>Additional Participation</th><th>Type</th><th>Artifacts Needed</th><th>Outcomes</th></tr>
+        <tr spellcheck="false"><td><span class="owner-chip">Paymon</span></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody></table>
+      <div class="seeds">
+        <strong spellcheck="false">Suggested seeds:</strong>
+        <ul>
+          <li spellcheck="false">Multi-cloud spike results (Malik) — what did we learn, what's the 266 plan?</li>
+          <li spellcheck="false">G2H parity with commercial alerting on events platform — timeline (Q3 vs Q4)</li>
+          <li spellcheck="false">50,000 tenant support target: what does engineering need to deliver?</li>
+          <li spellcheck="false">UIP Heron as Splunk alternative: spike status, outstanding questions for 266</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="topic-section">
+      <div class="topic-section-header" spellcheck="false">Cross-Cutting / Program Topics</div>
+      <div style="font-size:0.75rem; color:var(--text-muted); padding:6px 18px; background:#fafcff;" spellcheck="false">Covers: PDLC redesign, 3X productivity framework, RACI, release cadence, team velocity</div>
+      <div class="seeds" style="padding:12px 18px;">
+        <strong spellcheck="false">Suggested seeds:</strong>
+        <ul>
+          <li spellcheck="false">3X productivity: what did we learn, what stays, what changes for 266?</li>
+          <li spellcheck="false">Blocker escalation: define the process so dependencies don't sit unresolved for weeks</li>
+          <li spellcheck="false">Pre-Work Before India (Late June – Early July)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DECISIONS ===== -->
+<div id="decisions" class="page">
+  <div class="card">
+    <div class="card-header" style="cursor:default">
+      <h2 spellcheck="false">Decision Log</h2>
+      <span class="meta" spellcheck="false">To be finalized in Day 3, Session 3.4 · Accountable: Sri / Karishma / Laksh</span>
+    </div>
+    <div style="padding:8px 18px; background:#fafafa; border-bottom:1px solid #edf0f4; font-size:0.78rem; color:var(--text-muted);" spellcheck="false">
+      All decisions must be documented with: decision made · options considered · owner · rationale. No decision left open after Day 3.
+    </div>
+    <div class="decision-row" style="background:var(--light-blue); font-size:0.75rem; font-weight:700; color:var(--text-muted);">
+      <div class="d-num" spellcheck="false">#</div>
+      <div class="d-body" spellcheck="false">Decision</div>
+      <div class="d-owner" spellcheck="false">Owner</div>
+      <div class="d-status" spellcheck="false">Status</div>
+    </div>
+    <div class="decision-row">
+      <div class="d-num" spellcheck="false">D2</div>
+      <div class="d-body">
+        <div class="d-title" spellcheck="false">AgentForce vs. Claude AI backend</div>
+        <div class="d-options" spellcheck="false">Options: AgentForce / Claude / Hybrid</div>
+      </div>
+      <div class="d-owner" style="font-size:0.8rem;" spellcheck="false">Karishma</div>
+      <div class="d-status" spellcheck="false"><span class="status-tbd">TBD</span></div>
+    </div>
+    <div class="decision-row">
+      <div class="d-num" spellcheck="false">D3</div>
+      <div class="d-body">
+        <div class="d-title" spellcheck="false">264 Pilot Scope Lock</div>
+        <div class="d-options" spellcheck="false">Options: Full feature set vs. MVP</div>
+      </div>
+      <div class="d-owner" style="font-size:0.8rem;" spellcheck="false">Karishma / Kent</div>
+      <div class="d-status" spellcheck="false"><span class="status-tbd">TBD</span></div>
+    </div>
+    <div class="decision-row">
+      <div class="d-num" spellcheck="false">D4</div>
+      <div class="d-body">
+        <div class="d-title" spellcheck="false">ProM EOL Date</div>
+        <div class="d-options" spellcheck="false">Options: Feb 2027 / Later</div>
+      </div>
+      <div class="d-owner" style="font-size:0.8rem;" spellcheck="false">Karishma / Sri</div>
+      <div class="d-status" spellcheck="false"><span class="status-tbd">TBD</span></div>
+    </div>
+    <div class="decision-row">
+      <div class="d-num" spellcheck="false">D5</div>
+      <div class="d-body">
+        <div class="d-title" spellcheck="false">Sprint 9A Hardening Lock</div>
+        <div class="d-options" spellcheck="false">Options: Hardening-only vs. features allowed</div>
+      </div>
+      <div class="d-owner" style="font-size:0.8rem;" spellcheck="false">Laksh / Archana</div>
+      <div class="d-status" spellcheck="false"><span class="status-tbd">TBD</span></div>
+    </div>
+    <div class="decision-row">
+      <div class="d-num" spellcheck="false">D6</div>
+      <div class="d-body">
+        <div class="d-title" spellcheck="false">NGA Accuracy Threshold</div>
+        <div class="d-options" spellcheck="false">Defines migration gate criteria</div>
+      </div>
+      <div class="d-owner" style="font-size:0.8rem;" spellcheck="false">Karishma / Kent</div>
+      <div class="d-status" spellcheck="false"><span class="status-tbd">TBD</span></div>
+    </div>
+    <div class="decision-row">
+      <div class="d-num" spellcheck="false">D7</div>
+      <div class="d-body">
+        <div class="d-title" spellcheck="false">LLM Token Tracking Scope</div>
+        <div class="d-options" spellcheck="false">Per-RCA instrumentation scope</div>
+      </div>
+      <div class="d-owner" style="font-size:0.8rem;" spellcheck="false">Paymon / Karishma</div>
+      <div class="d-status" spellcheck="false"><span class="status-tbd">TBD</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PREWORK ===== -->
+<div id="prework" class="page">
+  <div class="card">
+    <div class="card-header" style="cursor:default"><h2 spellcheck="false">Pre-Work — Before India (Late June – Early July)</h2></div>
+    <table class="prework-table">
+      <tbody><tr spellcheck="false"><th>Owner</th><th>Action</th><th>Target</th></tr>
+      <tr spellcheck="false">
+        <td>Kent, Ravi, Betty</td>
+        <td>Finalize PM artifacts and topic owners in release planning doc</td>
+        <td><span class="date-chip past">Jul 2</span></td>
+      </tr>
+      <tr spellcheck="false">
+        <td>Karishma, Laksh, All team</td>
+        <td>Demo to Sri and team feedback session</td>
+        <td><span class="date-chip past">Jul 6</span></td>
+      </tr>
+      <tr spellcheck="false">
+        <td>Betty, Sri</td>
+        <td>Consult Sri for inputs + assign team responsibilities</td>
+        <td><span class="date-chip past">Jul 7</span></td>
+      </tr>
+      <tr spellcheck="false">
+        <td style="font-weight:600;">All team</td>
+        <td style="font-weight:600;">Add topics to feature sections in planning doc</td>
+        <td><span class="date-chip urgent">Jul 10 ⚡</span></td>
+      </tr>
+      <tr spellcheck="false">
+        <td>Samir</td>
+        <td>Schedule strategy review with Donovan + Karishma before Hyderabad trip</td>
+        <td><span class="date-chip">Before Jul 22</span></td>
+      </tr>
+      <tr spellcheck="false">
+        <td>Karishma, Kent, Ravi</td>
+        <td>Dreamforce, pilot and 264/266 product scope alignment</td>
+        <td><span class="date-chip">Before Jul 22</span></td>
+      </tr>
+      <tr spellcheck="false">
+        <td>Betty</td>
+        <td>Coordinate with Tara to reserve meeting rooms for 3-day sessions</td>
+        <td><span class="date-chip">Before Jul 22</span></td>
+      </tr>
+      <tr spellcheck="false">
+        <td>Betty</td>
+        <td>Block Shri calendar for relevant product strategy sessions (Wed + Thu)</td>
+        <td><span class="date-chip">Before Jul 22</span></td>
+      </tr>
+      <tr spellcheck="false">
+        <td>Betty</td>
+        <td>Finalized agenda published</td>
+        <td><span class="date-chip">Jul 15</span></td>
+      </tr>
+      <tr spellcheck="false">
+        <td>Kent, Ravi</td>
+        <td>Prepare workshop artifacts — architectural and strategic topic documentation</td>
+        <td><span class="date-chip">Jul 15</span></td>
+      </tr>
+      <tr spellcheck="false">
+        <td>Kent, Ravi, Auro</td>
+        <td>12-month LRP roadmap document for ProM/Scale Center → Scale360 migration</td>
+        <td><span class="date-chip">Before Jul 22</span></td>
+      </tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- ===== PEOPLE ===== -->
+<div id="people" class="page">
+  <div class="card">
+    <div class="card-header" style="cursor:default"><h2 spellcheck="false">Attendees &amp; RACI Key</h2></div>
+    <div class="people-grid">
+      <div class="person-card" spellcheck="false">
+        <span class="person-code">Betty</span>
+        <span class="person-name">Betty Yip</span>
+        <span class="person-role">TPM — Scale360</span>
+      </div>
+      <div class="person-card" spellcheck="false">
+        <span class="person-code">Karishma</span>
+        <span class="person-name">Karishma Lalwani</span>
+        <span class="person-role">PM — Scalability Products</span>
+      </div>
+      <div class="person-card" spellcheck="false">
+        <span class="person-code">Kent</span>
+        <span class="person-name">Kent Allison</span>
+        <span class="person-role">PM — Scale360 &amp; ProM</span>
+      </div>
+      <div class="person-card" spellcheck="false">
+        <span class="person-code">Ravi</span>
+        <span class="person-name">Ravi Raina</span>
+        <span class="person-role">PM — Scale360 &amp; Scale Center</span>
+      </div>
+      <div class="person-card" spellcheck="false">
+        <span class="person-code">Samir</span>
+        <span class="person-name">Samir Damle</span>
+        <span class="person-role">UI/UX</span>
+      </div>
+      <div class="person-card" spellcheck="false">
+        <span class="person-code">Laksh</span>
+        <span class="person-name">Laksh Venka</span>
+        <span class="person-role">Engineering Lead</span>
+      </div>
+      <div class="person-card" spellcheck="false">
+        <span class="person-code">Paymon</span>
+        <span class="person-name">Paymon Teyer</span>
+        <span class="person-role">Lead Architect / PO</span>
+      </div>
+      <div class="person-card" spellcheck="false">
+        <span class="person-code">Laurent</span>
+        <span class="person-name">Laurent Pautet</span>
+        <span class="person-role">Lead Architect</span>
+      </div>
+      <div class="person-card" spellcheck="false">
+        <span class="person-code">Archana</span>
+        <span class="person-name">Archana Sethuraman</span>
+        <span class="person-role">Engineering Manager</span>
+      </div>
+      <div class="person-card" spellcheck="false">
+        <span class="person-code">Sri</span>
+        <span class="person-name">Sriram Dinavahi</span>
+        <span class="person-role">SVP Engineering — Exec Sponsor</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default"><h2 spellcheck="false">RACI Legend</h2></div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); padding:16px; gap:12px;">
+      <div style="padding:12px; background:var(--light-blue); border-radius:6px;">
+        <div style="font-weight:800; font-size:1.1rem; color:var(--navy);" spellcheck="false">R</div>
+        <div style="font-weight:600; font-size:0.85rem;" spellcheck="false">Responsible</div>
+        <div style="font-size:0.78rem; color:var(--text-muted); margin-top:4px;" spellcheck="false">Leads / runs the session</div>
+      </div>
+      <div style="padding:12px; background:var(--light-blue); border-radius:6px;">
+        <div style="font-weight:800; font-size:1.1rem; color:var(--navy);" spellcheck="false">A</div>
+        <div style="font-weight:600; font-size:0.85rem;" spellcheck="false">Accountable</div>
+        <div style="font-size:0.78rem; color:var(--text-muted); margin-top:4px;" spellcheck="false">Decision authority; owns the outcome</div>
+      </div>
+      <div style="padding:12px; background:var(--light-blue); border-radius:6px;">
+        <div style="font-weight:800; font-size:1.1rem; color:var(--navy);" spellcheck="false">C</div>
+        <div style="font-weight:600; font-size:0.85rem;" spellcheck="false">Consulted</div>
+        <div style="font-size:0.78rem; color:var(--text-muted); margin-top:4px;" spellcheck="false">Must contribute input before decisions</div>
+      </div>
+      <div style="padding:12px; background:var(--light-blue); border-radius:6px;">
+        <div style="font-weight:800; font-size:1.1rem; color:var(--navy);" spellcheck="false">I</div>
+        <div style="font-weight:600; font-size:0.85rem;" spellcheck="false">Informed</div>
+        <div style="font-size:0.78rem; color:var(--text-muted); margin-top:4px;" spellcheck="false">Present or updated after session</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default"><h2 spellcheck="false">Session Ownership Summary</h2></div>
+    <table class="prework-table">
+      <tbody><tr spellcheck="false"><th>Owner</th><th>Sessions Responsible For</th><th>Total Time</th></tr>
+      <tr spellcheck="false"><td><strong>Betty Yip</strong></td><td>1.1, 1.4, 1.5, 1.7, 2.1, 2.7*, 2.8, 2.9, 3.1*, 3.2, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9</td><td>~6.5 hrs</td></tr>
+      <tr spellcheck="false"><td>Karishma Lalwani</td><td>1.2, 1.3</td><td>~2.25 hrs</td></tr>
+      <tr spellcheck="false"><td>Kent Allison</td><td>1.6</td><td>~0.75 hrs</td></tr>
+      <tr spellcheck="false"><td>Laurent Pautet</td><td>2.2, 2.3</td><td>~1.5 hrs</td></tr>
+      <tr spellcheck="false"><td>Paymon Teyer</td><td>2.4, 2.5</td><td>~1.5 hrs</td></tr>
+      <tr spellcheck="false"><td>Archana Sethuraman</td><td>3.3</td><td>~0.75 hrs</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+</div><!-- /main -->
+
+<div class="edit-hint" id="editHint">✏️ Click any text to edit</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── Inline editing ──────────────────────────────────────────────────────────
+
+function makeEditable(el) {
+  if (el.isContentEditable) return;
+  el.setAttribute('contenteditable', 'true');
+  el.setAttribute('spellcheck', 'false');
+  el.addEventListener('input', () => el.classList.add('edited'));
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); el.blur(); }
+    if (e.key === 'Escape') { el.blur(); }
+  });
+}
+
+const SKIP_TAGS = new Set(['BUTTON','INPUT','SELECT','TEXTAREA','SCRIPT','STYLE','IFRAME','NAV']);
+const BLOCK_TAGS = new Set(['DIV','P','UL','OL','LI','TABLE','TBODY','THEAD','TR','SECTION','ARTICLE','H1','H2','H3','H4','H5']);
+const SKIP_CLASSES = ['add-row-btn','del-cell','edit-hint','badge','nav'];
+
+function isSkipped(el) {
+  if (SKIP_TAGS.has(el.tagName)) return true;
+  if (SKIP_CLASSES.some(c => el.classList.contains(c))) return true;
+  if (el.closest('.add-row-btn, .del-cell, .edit-hint, nav, .nav, .badge')) return true;
+  return false;
+}
+
+function isLeafText(el) {
+  if (isSkipped(el)) return false;
+  if (!el.textContent.trim()) return false;
+  // Leaf = no block-level children with their own text
+  const hasBlockChild = Array.from(el.children).some(
+    c => BLOCK_TAGS.has(c.tagName) && c.textContent.trim().length > 0
+  );
+  return !hasBlockChild;
+}
+
+function initEditing() {
+  document.querySelectorAll('.main *').forEach(el => {
+    if (el.isContentEditable) return;
+    if (isLeafText(el)) makeEditable(el);
+  });
+  addDeleteButtons();
+  addRowButtons();
+}
+
+// ── Delete row buttons ───────────────────────────────────────────────────────
+
+function addDeleteButtons() {
+  document.querySelectorAll('.topic-table tr:not(:first-child), .prework-table tr:not(:first-child)').forEach(row => {
+    if (row.querySelector('.del-cell')) return;
+    const td = document.createElement('td');
+    td.className = 'del-cell';
+    td.innerHTML = '<button class="del-btn" title="Delete row">×</button>';
+    td.querySelector('.del-btn').addEventListener('click', () => {
+      if (confirm('Delete this row?')) row.remove();
+    });
+    row.appendChild(td);
+  });
+}
+
+// ── Add row buttons ──────────────────────────────────────────────────────────
+
+function addRowButtons() {
+  document.querySelectorAll('.topic-table, .prework-table').forEach(table => {
+    if (table.nextElementSibling && table.nextElementSibling.classList.contains('add-row-btn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'add-row-btn';
+    btn.textContent = '+ Add row';
+    btn.addEventListener('click', () => {
+      const headerRow = table.querySelector('tr:first-child');
+      const colCount = headerRow ? headerRow.cells.length : 4;
+      const tr = document.createElement('tr');
+      for (let i = 0; i < colCount; i++) {
+        const td = document.createElement('td');
+        td.textContent = i === 0 ? 'Owner' : '—';
+        makeEditable(td);
+        tr.appendChild(td);
+      }
+      // del button
+      const delTd = document.createElement('td');
+      delTd.className = 'del-cell';
+      delTd.innerHTML = '<button class="del-btn" title="Delete row">×</button>';
+      delTd.querySelector('.del-btn').addEventListener('click', () => {
+        if (confirm('Delete this row?')) tr.remove();
+      });
+      tr.appendChild(delTd);
+      table.appendChild(tr);
+      tr.querySelector('td').focus();
+    });
+    table.insertAdjacentElement('afterend', btn);
+  });
+}
+
+// ── Hint toast on first click ─────────────────────────────────────────────
+
+let hintShown = false;
+document.addEventListener('focusin', e => {
+  if (e.target.isContentEditable && !hintShown) {
+    hintShown = true;
+    const hint = document.getElementById('editHint');
+    hint.classList.add('show');
+    setTimeout(() => hint.classList.remove('show'), 2500);
+  }
+});
+
+// ── Init on load + re-init when switching tabs ────────────────────────────
+
+function saveEdits() {
+  // Strip contenteditable attrs and edited classes before saving
+  const clone = document.documentElement.cloneNode(true);
+  clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+  clone.querySelectorAll('.edited').forEach(el => el.classList.remove('edited'));
+  clone.querySelectorAll('.del-cell').forEach(el => el.remove());
+  clone.querySelectorAll('.add-row-btn').forEach(el => el.remove());
+  const html = '<!DOCTYPE html>\n' + clone.outerHTML;
+  const blob = new Blob([html], {type: 'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'scale360-r266-planning.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function updateCountdown() {
+  const df = new Date('2026-09-15');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const days = Math.ceil((df - today) / 86400000);
+  const el = document.getElementById('dfCountdown');
+  if (el) el.textContent = days > 0 ? days : 0;
+}
+
+document.addEventListener('DOMContentLoaded', () => { initEditing(); updateCountdown(); });
+
+const _showPage = showPage;
+window.showPage = function(id) {
+  _showPage(id);
+  setTimeout(initEditing, 50);
+};
+</script>
+
+
+</body></html>
