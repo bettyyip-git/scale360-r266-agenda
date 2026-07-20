@@ -362,6 +362,7 @@
 <nav class="nav">
 
   <button class="active" onclick="showPage('overview')">Overview</button>
+  <button onclick="showPage('outcomes')">Key Outcomes</button>
   <button onclick="showPage('day1')">Day 1 — User Journey Headless Experience</button>
   <button onclick="showPage('day2')">Day 2 — UX/Product Launch to GA</button>
   <button onclick="showPage('day3')">Day 3 — Elevator Pitch &amp; Key Decisions</button>
@@ -600,6 +601,151 @@
         <div style="font-size:0.78rem; font-weight:800; color:var(--navy);" spellcheck="false">Jan 31, 2027</div>
       </div>
 
+    </div>
+  </div>
+</div>
+
+<!-- ===== KEY OUTCOMES ===== -->
+<div id="outcomes" class="page">
+  <div class="card">
+    <div class="card-header" style="cursor:default">
+      <h2 spellcheck="false">R266 Planning: Key Outcomes</h2>
+      <span class="meta" spellcheck="false">7 Strategic Outcomes</span>
+    </div>
+    <div style="padding:20px;">
+      <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.7; margin-bottom:20px;" spellcheck="false">
+        Our R266 planning aims to align on seven critical dimensions that define product direction, customer value, execution readiness, and program health.
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default; background:var(--blue);">
+      <h2 spellcheck="false">1. Product Vision & Timeline</h2>
+    </div>
+    <div style="padding:18px 20px;">
+      <p style="font-size:0.85rem; line-height:1.7; margin-bottom:12px;" spellcheck="false">
+        <strong style="color:var(--navy);">What are we building, what will the customer experience be (external customers + internal personas), and when will it be available?</strong>
+      </p>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.7;" spellcheck="false">
+        We need a clear future state user journey that the team can rally behind, with concrete timelines and customer touchpoints defined.
+      </p>
+      <div style="margin-top:12px; padding:10px 12px; background:var(--light-blue); border-radius:6px; font-size:0.8rem;" spellcheck="false">
+        <strong style="color:var(--navy);">📍 Related Topics:</strong> Future State User Journey (Day 1), Topic 1.1-1.7
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default; background:var(--blue);">
+      <h2 spellcheck="false">2. ProM & Scale Center Strategy</h2>
+    </div>
+    <div style="padding:18px 20px;">
+      <p style="font-size:0.85rem; line-height:1.7; margin-bottom:12px;" spellcheck="false">
+        <strong style="color:var(--navy);">What's our plan for ProM and Scale Center? How do these components fit into the broader Scale360 roadmap?</strong>
+      </p>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.7;" spellcheck="false">
+        Align on migration strategy, feature timelines, EOL dates, and how we transition existing customers to Scale360.
+      </p>
+      <div style="margin-top:12px; padding:10px 12px; background:var(--light-blue); border-radius:6px; font-size:0.8rem;" spellcheck="false">
+        <strong style="color:var(--navy);">📍 Related Topics:</strong> Topic 2.3 — ProM & Scale Center Migration to Scale360 & EOL
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default; background:var(--blue);">
+      <h2 spellcheck="false">3. Dreamforce Engagement</h2>
+    </div>
+    <div style="padding:18px 20px;">
+      <p style="font-size:0.85rem; line-height:1.7; margin-bottom:12px;" spellcheck="false">
+        <strong style="color:var(--navy);">Do we have a Dreamforce presence this cycle? If so, what's the scope and commitment level?</strong>
+      </p>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.7;" spellcheck="false">
+        Clarify what demos, presentations, or commitments we're making for Dreamforce (Sep 15, 2026) and what's required to deliver them.
+      </p>
+      <div style="margin-top:12px; padding:10px 12px; background:#fff3cd; border-radius:6px; font-size:0.8rem;" spellcheck="false">
+        <strong style="color:#7D6608;">⏱️ Deadline:</strong> Dreamforce Sep 15, 2026 — <strong id="dfCountdown2">76 days</strong> from today
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default; background:var(--blue);">
+      <h2 spellcheck="false">4. Service Owner Onboarding</h2>
+    </div>
+    <div style="padding:18px 20px;">
+      <p style="font-size:0.85rem; line-height:1.7; margin-bottom:12px;" spellcheck="false">
+        <strong style="color:var(--navy);">What's the onboarding experience for Scale360 service owners? How do we set them up for success from day one?</strong>
+      </p>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.7;" spellcheck="false">
+        Define the process, tools, documentation, and support model for teams adopting Scale360 services.
+      </p>
+      <div style="margin-top:12px; padding:10px 12px; background:var(--light-blue); border-radius:6px; font-size:0.8rem;" spellcheck="false">
+        <strong style="color:var(--navy);">📍 Related Topics:</strong> Topic 1.7 — Scale360 Service Ownership Onboarding
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default; background:var(--blue);">
+      <h2 spellcheck="false">5. Key Decisions</h2>
+    </div>
+    <div style="padding:18px 20px;">
+      <p style="font-size:0.85rem; line-height:1.7; margin-bottom:12px;" spellcheck="false">
+        <strong style="color:var(--navy);">What are the must-make decisions to unblock progress? Where do we need executive alignment or cross-functional commitment?</strong>
+      </p>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.7;" spellcheck="false">
+        Surface critical decision points across product strategy, architecture, resourcing, and scope that require leadership sign-off.
+      </p>
+      <div style="margin-top:12px; padding:10px 12px; background:var(--light-blue); border-radius:6px; font-size:0.8rem;" spellcheck="false">
+        <strong style="color:var(--navy);">📍 Related Topics:</strong> Day 3 — Workshop Outcomes Review & Key Decisions; <a href="#" onclick="showPage('decisions'); return false;" style="color:var(--blue); text-decoration:underline;">Decision Log</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default; background:var(--blue);">
+      <h2 spellcheck="false">6. Program Health & Work Streams</h2>
+    </div>
+    <div style="padding:18px 20px;">
+      <p style="font-size:0.85rem; line-height:1.7; margin-bottom:12px;" spellcheck="false">
+        <strong style="color:var(--navy);">How do we track program health across work streams? What are the critical metrics and rhythms to maintain visibility?</strong>
+      </p>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.7;" spellcheck="false">
+        Establish tracking mechanisms, KPIs, and regular checkpoints to ensure the program stays on track from planning through GA.
+      </p>
+      <div style="margin-top:12px; padding:10px 12px; background:var(--light-blue); border-radius:6px; font-size:0.8rem;" spellcheck="false">
+        <strong style="color:var(--navy);">📍 Key Dates:</strong> R266 FF (Nov 19), R266 RF (Dec 10), Product GA (Jan 31, 2027)
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default; background:var(--blue);">
+      <h2 spellcheck="false">7. Dependencies & Integration Points</h2>
+    </div>
+    <div style="padding:18px 20px;">
+      <p style="font-size:0.85rem; line-height:1.7; margin-bottom:12px;" spellcheck="false">
+        <strong style="color:var(--navy);">What are the critical dependencies on other teams/programs? Where do we need upstream commitments or cross-team coordination to unblock Scale360 work?</strong>
+      </p>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.7;" spellcheck="false">
+        Map dependencies across engineering, product, UX, legal, security, and external teams. Identify integration points that could block progress if not addressed early.
+      </p>
+      <div style="margin-top:12px; padding:10px 12px; background:var(--light-blue); border-radius:6px; font-size:0.8rem;" spellcheck="false">
+        <strong style="color:var(--navy);">📍 Related Topics:</strong> Topic 2.2 — Pricing & CTS; Topic 2.5 — Product Launch to GA; Topic 2.6 — Architecture Comparison
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" style="cursor:default; background:var(--navy);">
+      <h2 spellcheck="false">Summary</h2>
+    </div>
+    <div style="padding:18px 20px;">
+      <p style="font-size:0.85rem; line-height:1.7; color:var(--text-muted);" spellcheck="false">
+        These seven outcomes balance <strong style="color:var(--navy);">what</strong> (product/roadmap), <strong style="color:var(--navy);">who</strong> (customers, service owners), <strong style="color:var(--navy);">when</strong> (timeline, Dreamforce), and <strong style="color:var(--navy);">how</strong> (decisions, tracking, dependencies) — providing a complete picture for R266 strategic planning.
+      </p>
     </div>
   </div>
 </div>
