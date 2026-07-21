@@ -2,10 +2,10 @@
 
 ## Last Known Good Version
 
-**Commit ID:** `531f6e1c5f5cc74be9f3af6dd22ed756005cc8b1`  
-**Date:** 2026-07-08 13:37:05 -0700  
-**Status:** ✅ All tabs working correctly  
-**Description:** Fix Day 1 missing closing div - this was hiding Day 2, Day 3, and all other tabs
+**Commit ID:** `87ba4bc958f100d57ac2926c3956d39db85b5e10`  
+**Date:** 2026-07-17 09:29:01 -0700  
+**Status:** ✅ Production version deployed and verified  
+**Description:** Reorganize Key Topics section by day structure
 
 ### What's Working:
 - ✅ Overview tab with 3-day structure
@@ -27,6 +27,11 @@
 
 ## Version History
 
+### 2026-07-17 - Key Topics Reorganization
+- Reorganized Key Topics section by day structure
+- Improved content organization for better clarity
+- Verified deployment at https://bettyyip-git.github.io/scale360-r266-agenda/
+
 ### 2026-07-08 - Initial Development
 - Created Scale360 R266 agenda website
 - Implemented 3-day workshop structure
@@ -47,12 +52,18 @@
 To rollback to this last known good version:
 
 ```bash
-cd ~/Downloads/scale360-r266-agenda-app
-git checkout 531f6e1c5f5cc74be9f3af6dd22ed756005cc8b1
+cd ~/Downloads/scale360-r266-agenda-app/scale360-r266-agenda
+git checkout 87ba4bc958f100d57ac2926c3956d39db85b5e10
+```
+
+Or use the tag:
+
+```bash
+git checkout v1.0-lkg-2026-07-21
 ```
 
 To create a recovery branch from this version:
 
 ```bash
-git branch last-known-good-2026-07-08 531f6e1c5f5cc74be9f3af6dd22ed756005cc8b1
+git branch last-known-good-2026-07-21 87ba4bc958f100d57ac2926c3956d39db85b5e10
 ```
