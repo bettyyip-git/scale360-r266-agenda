@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seamless Release Experience (SRx) Dashboard - FY26 Q1-Q2</title>
+<style>
+  :root {
+    --navy: #1F4E79;
+    --blue: #2E75B6;
+    --light-blue: #D6E4F0;
+    --green: #C6EFCE;
+    --green-text: #276221;
+    --red: #FFC7CE;
+    --red-text: #9C0006;
+    --yellow: #FFEB9C;
+    --yellow-text: #7D6608;
+    --border: #e2e8f0;
+    --text: #1a1a1a;
+    --shadow-sm: 0 1px 3px rgba(31,78,121,0.08), 0 1px 2px rgba(31,78,121,0.06);
+    --shadow-md: 0 4px 16px rgba(31,78,121,0.10);
+    --shadow-lg: 0 10px 30px rgba(31,78,121,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(160deg, #eef3f9 0%, #e3ecf6 55%, #dde8f4 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    padding: 28px 20px 60px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    background:
+      radial-gradient(circle at 88% -20%, rgba(46,117,182,0.55), transparent 55%),
+      linear-gradient(120deg, #16375a 0%, #1F4E79 45%, #2E75B6 120%);
+    color: white;
+    padding: 30px 36px;
+    border-radius: 14px;
+    margin-bottom: 26px;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .header::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: linear-gradient(180deg, #6db3f2, #2E75B6);
+  }
+
+  .header h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .header-meta {
+    font-size: 0.85rem;
+    opacity: 0.94;
+    max-width: 960px;
+  }
+
+  .dashboard {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    margin-bottom: 26px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .section:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .section-header {
+    background: linear-gradient(100deg, var(--navy) 0%, var(--blue) 100%);
+    color: white;
+    padding: 16px 26px;
+    font-size: 1.12rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-header.collapsible {
+    cursor: pointer;
+    justify-content: space-between;
+    user-select: none;
+    transition: filter 0.2s ease;
+  }
+
+  .section-header.collapsible:hover {
+    filter: brightness(1.08);
+  }
+
+  .section-header.collapsible .chevron {
+    transition: transform 0.2s ease;
+    font-size: 0.9rem;
+  }
+
+  .section-header.collapsible.collapsed .chevron {
+    transform: rotate(-90deg);
+  }
+
+  .section-header.collapsible.collapsed + .section-body {
+    display: none;
+  }
+
+  .section-body {
+    padding: 24px;
+  }
+
+  /* Metrics Grid */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 1200px) {
+    .metrics-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .metrics-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .metric-card {
+    background: linear-gradient(160deg, #ffffff 0%, var(--light-blue) 140%);
+    border-radius: 10px;
+    padding: 14px 16px;
+    border: 1px solid rgba(46,117,182,0.18);
+    border-left: 5px solid var(--blue);
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .metric-card.on-target {
+    border-left-color: var(--green-text);
+    border-color: rgba(39,98,33,0.22);
+    background: linear-gradient(160deg, #ffffff 0%, var(--green) 150%);
+  }
+
+  .metric-card.off-target {
+    border-left-color: var(--red-text);
+    border-color: rgba(156,0,6,0.20);
+    background: linear-gradient(160deg, #ffffff 0%, var(--red) 150%);
+  }
+
+  .metric-card.warning {
+    border-left-color: var(--yellow-text);
+    border-color: rgba(125,102,8,0.22);
+    background: linear-gradient(160deg, #ffffff 0%, var(--yellow) 155%);
+  }
+
+  .metric-status {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 4px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .metric-label {
+    font-size: 0.7rem;
+    color: var(--navy);
+    font-weight: 600;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+  }
+
+  .metric-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .metric-target {
+    font-size: 0.7rem;
+    color: #555;
+    margin-top: 4px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .metric-link {
+    margin-top: 8px;
+    font-size: 0.65rem;
+  }
+
+  .metric-link a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  .metric-link a:hover {
+    text-decoration: underline;
+  }
+
+  /* Comparison Table */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+
+  .comparison-table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .comparison-table th {
+    background: linear-gradient(100deg, var(--navy), var(--blue));
+    color: white;
+    padding: 13px 14px;
+    text-align: left;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .comparison-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #eef2f7;
+    font-size: 0.9rem;
+  }
+
+  .comparison-table tbody tr:nth-child(even) td {
+    background: #f8fafc;
+  }
+
+  .comparison-table tr:hover td {
+    background: #eef4fb;
+  }
+
+  .trend-up {
+    color: var(--red-text);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .trend-down {
+    color: var(--green-text);
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  .trend-neutral {
+    color: #666;
+    font-size: 1.2rem;
+  }
+
+  .delta {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-left: 8px;
+    font-weight: 600;
+  }
+
+  .delta.improvement {
+    background: var(--green);
+    color: var(--green-text);
+  }
+
+  .delta.degradation {
+    background: var(--red);
+    color: var(--red-text);
+  }
+
+  /* Highlights */
+  .highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .highlight-card {
+    border-left: 5px solid var(--blue);
+    padding: 20px;
+    background: linear-gradient(160deg, #ffffff 0%, #f4f8fc 100%);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--blue);
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .highlight-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .highlight-card.improvement {
+    border-left-color: var(--green-text);
+    border-color: rgba(39,98,33,0.20);
+    background: linear-gradient(160deg, #ffffff 0%, #e4f6e6 130%);
+  }
+
+  .highlight-card.degradation {
+    border-left-color: var(--red-text);
+    border-color: rgba(156,0,6,0.18);
+    background: linear-gradient(160deg, #ffffff 0%, #fde6e9 130%);
+  }
+
+  .highlight-title {
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--navy);
+  }
+
+  .highlight-icon {
+    font-size: 1.3rem;
+  }
+
+  .highlight-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #222;
+  }
+
+  .highlight-metric {
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #666;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .tab:hover {
+    color: var(--blue);
+  }
+
+  .tab.active {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+  }
+
+  .tab-content {
+    display: none;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .note {
+    background: linear-gradient(120deg, #fff8dd, var(--yellow));
+    border-left: 4px solid var(--yellow-text);
+    padding: 13px 18px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin: 16px 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Column group label chips */
+  .col-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Seamless Release Experience (SRx) Dashboard</h1>
+  <div class="header-meta" style="line-height: 1.6;">
+    <span style="font-size: 1rem;">The Seamless Release Experience (SRx) Program delivers Waymo-like change delivery for Salesforce Core — rapid, intelligent, and super-safe — across all substrates, security boundaries, and traffic conditions. SRx is the foundational delivery vehicle for Core code, config, secrets, capacity overrides, and canaries, enabling releases and rollbacks anytime, at peak or off-peak.</span>
+    <div style="margin-top: 10px;">
+      <strong>📋 Program Charter:</strong> <a href="https://docs.google.com/document/d/1Tn73efkuHv_Dpc415ZDHFU-n-uqiVb66iP1sQYIXDwQ/edit?usp=sharing" target="_blank" style="color: #fff; text-decoration: underline; font-weight: 600;">SRx Program Charter</a>
+    </div>
+  </div>
+</div>
+
+<div class="dashboard">
+
+  <!-- TL/DR HIGHLIGHTS + AT RISK -->
+  <div class="section">
+    <div class="section-header">⚡ TL/DR; HIGHLIGHTS</div>
+    <div class="section-body">
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+
+        <!-- TL/DR Highlights (left, narrower) -->
+        <div style="flex: 1; min-width: 300px; max-width: 55%;">
+          <div class="highlights">
+            <div class="highlight-card degradation">
+              <div class="highlight-title">
+                <span class="highlight-icon">🚀</span>
+                <span>Release Time, Startup Performance &amp; Scale-Up&nbsp;&nbsp;|&nbsp;&nbsp;Status: 🔴</span>
+              </div>
+              <div class="highlight-desc">
+                <strong>Release Time and Startup Performance:</strong> The release time app startup is currently not meeting the nine-minute target due to dependencies on Apex pre-compilation. Efforts are underway to remove pre-compilation from the critical path, with 266 pilot concepts being evaluated to improve startup speeds. Recent successes include a successful emergency capacity release completed in under three hours.
+                <br><br>
+                <strong>Scale-Up Efficiency:</strong> The team achieved one minute of savings in scale-up time through efficiencies in init containers and successfully rolled out the SOCI snapshotter to speed up image downloads.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Targets At Risk (right) -->
+        <div style="flex: 1; min-width: 280px;">
+          <div style="background: linear-gradient(160deg, #fff 0%, #fde6e9 130%); border: 1px solid rgba(156,0,6,0.18); border-left: 5px solid var(--red-text); border-radius: 10px; padding: 16px 18px; box-shadow: var(--shadow-sm);">
+            <div style="font-weight: 700; font-size: 1.02rem; color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.2rem;">🚨</span> Performance Targets At Risk
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.82rem;">
+              <div style="padding: 8px 10px; background: rgba(255,199,206,0.35); border-radius: 6px; border-left: 3px solid var(--red-text);">
+                <strong>Headline ScaleUp (All Types)</strong><br>
+                🔴 9m 36s — Target: 6m 0s <span style="color: var(--red-text); font-weight:700;">(+3m 36s gap)</span>
+              </div>
+              <div style="padding: 8px 10px; background: rgba(255,199,206,0.35); border-radius: 6px; border-left: 3px solid var(--red-text);">
+                <strong>Core App Scale-Up (release)</strong><br>
+                🔴 15m 15s — Target: ≤ 9 min <span style="color: var(--red-text); font-weight:700;">(+6m 15s gap)</span>
+              </div>
+              <div style="padding: 8px 10px; background: rgba(255,199,206,0.35); border-radius: 6px; border-left: 3px solid var(--red-text);">
+                <strong>Core App Startup Hyperforce — Release (p80)</strong><br>
+                🔴 14m 39s / 13m 32s — Target: ≤ 9 min <span style="color: var(--red-text); font-weight:700;">(+5m 39s / +4m 32s)</span>
+              </div>
+              <div style="padding: 8px 10px; background: rgba(255,199,206,0.35); border-radius: 6px; border-left: 3px solid var(--red-text);">
+                <strong>Core App Startup Hyperforce — Peak Release (p80)</strong><br>
+                🔴 10m 4s / 11m 39s — Target: ≤ 9 min <span style="color: var(--red-text); font-weight:700;">(+1m 4s / +2m 39s)</span>
+              </div>
+              <div style="padding: 8px 10px; background: rgba(255,235,156,0.35); border-radius: 6px; border-left: 3px solid var(--yellow-text);">
+                <strong>Core App Scale-Up (non-release HPA)</strong><br>
+                🟡 8m 22s — Target: ≤ 7 min <span style="color: var(--yellow-text); font-weight:700;">(+1m 22s gap)</span>
+              </div>
+              <div style="padding: 8px 10px; background: rgba(255,235,156,0.35); border-radius: 6px; border-left: 3px solid var(--yellow-text);">
+                <strong>Core App Startup Hyperforce — Other (p80)</strong><br>
+                🟡 4m 51s / 4m 43s — Target: ≤ 4 min <span style="color: var(--yellow-text); font-weight:700;">(+51s / +43s)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Target Metrics -->
+  <div class="section">
+    <div class="section-header">📊 Performance Targets & Current Metrics (July 2026)</div>
+    <div class="section-body">
+
+      <div class="metric-label" style="font-size: 0.8rem; margin: 0 0 10px;">🎯 Release &amp; Recovery Targets (status from FY27 HCC V2MOM — July)</div>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+
+        <!-- LEFT: ScaleUp metrics -->
+        <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 12px;">
+          <div class="col-label" style="color: var(--navy); background: var(--light-blue); margin-bottom: 0;">⚙️ Scale-Up</div>
+
+          <div class="metric-card off-target">
+            <div class="metric-label">Headline ScaleUp (All Types)</div>
+            <div class="metric-status">🔴 9m 36s</div>
+            <div class="metric-target">🎯 Target: 6m 0s | Gap: +3m 36s<br>June: 10m 7s → July: 9m 36s (▼ 31s improved)</div>
+            <div class="metric-link">
+              <a href="https://docs.google.com/spreadsheets/d/11-pdXc0KnnMg9QWfpS7zxzBftVZclt6DXL9JijPxu5s/edit?gid=508249819#gid=508249819" target="_blank">📈 View Data Source</a>
+            </div>
+          </div>
+
+          <div class="metric-card off-target">
+            <div class="metric-label">Core App Scale-Up (release time)</div>
+            <div class="metric-status">🔴 15m 15s</div>
+            <div class="metric-target">🎯 Target: &le; 9 min | Gap: +6m 15s — ApexPrecompilation warmer root cause<br>June: 15m 0s → July: 15m 15s (▲ 15s worse)</div>
+          </div>
+
+          <div class="metric-card warning">
+            <div class="metric-label">Core App Scale-Up (non-release HPA)</div>
+            <div class="metric-status">🟡 8m 22s</div>
+            <div class="metric-target">🎯 Target: &le; 7 min | Gap: +1m 22s<br>June: 8m 47s → July: 8m 22s (▼ 25s improved)</div>
+          </div>
+
+        </div>
+
+        <!-- MIDDLE: Core App Startup Hyperforce (p80) -->
+        <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 12px;">
+          <div class="col-label" style="color: var(--navy); background: var(--light-blue); margin-bottom: 0;">🚀 Core App Startup (p80)</div>
+
+          <div class="metric-card off-target">
+            <div class="metric-label">Core App Startup Hyperforce — Release (p80)</div>
+            <div class="metric-status">🔴 14m 39s / 13m 32s</div>
+            <div class="metric-target">🎯 Target (release): &le; 9 min | main-2 / main-4<br>June: 14m 30s / 14m 4s → July: 14m 39s / 13m 32s (▲ 9s / ▼ 32s)<br>Gap: +5m 39s / +4m 32s</div>
+          </div>
+
+          <div class="metric-card off-target">
+            <div class="metric-label">Core App Startup Hyperforce — Peak Release (p80)</div>
+            <div class="metric-status">🔴 10m 4s / 11m 39s</div>
+            <div class="metric-target">🎯 Target (release): &le; 9 min | main-2 / main-4<br>June: 12m 45s / 14m 5s → July: 10m 4s / 11m 39s (▼ 2m 41s / ▼ 2m 26s)<br>Gap: +1m 4s / +2m 39s</div>
+          </div>
+
+          <div class="metric-card warning">
+            <div class="metric-label">Core App Startup Hyperforce — Other (p80)</div>
+            <div class="metric-status">🟡 4m 51s / 4m 43s</div>
+            <div class="metric-target">🎯 Target (non-release): &le; 4 min | main-2 / main-4<br>June: 4m 52s / 4m 39s → July: 4m 51s / 4m 43s (▼ 1s / ▲ 4s)<br>Gap: +51s / +43s</div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: Rollback / recovery targets -->
+        <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; gap: 12px;">
+          <div class="col-label" style="color: var(--navy); background: var(--light-blue); margin-bottom: 0;">↩️ Rollback &amp; Recovery</div>
+
+          <div class="metric-card warning">
+            <div class="metric-label">Rapid Rollback (rolling restart)</div>
+            <div class="metric-status">🟢 On track</div>
+            <div class="metric-target">🎯 Target: &lt; 10 min | Rollout across all sandbox cells in progress (Sprint 7b); confirmed go-forward strategy<br><strong>Gap: not yet measured</strong> — no production p80 baseline until sandbox rollout completes</div>
+          </div>
+
+          <div class="metric-card warning">
+            <div class="metric-label">Fix Forward (emergency release)</div>
+            <div class="metric-status">🟢 On track</div>
+            <div class="metric-target">🎯 Target: &lt; 20 min | Fleet-wide capacity-aware emergency release ~2h 54m (862 targets, 100%) on EBF 2026-07-09<br><strong>Gap: not directly comparable</strong> — only fleet-wide (~2h 54m) measured; no per-unit &lt; 20 min figure yet</div>
+          </div>
+
+          <div class="metric-card warning">
+            <div class="metric-label">Emergency Config Override (ECO)</div>
+            <div class="metric-status">🟢 On track</div>
+            <div class="metric-target">🎯 Target: &lt; 15 min | Working in AWS; GCP verification targeted for 266<br><strong>Gap: not yet measured</strong> — AWS functional, awaiting GCP verification (266) before p80 baseline</div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="note">
+        <strong>📝 Note:</strong> Core App Startup Hyperforce (main-2/main-4) and Core App Startup (prod, new codeline) metrics were replaced with per-release per-mode startup time starting in June 2026.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 2: April-July Metrics & Comparisons -->
+  <div class="section">
+    <div class="section-header collapsible" onclick="toggleSection(this)"><span>📈 Q2 and MoM Metrics &amp; Trends</span><span class="chevron">▼</span></div>
+    <div class="section-body">
+
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('monthly')">Monthly View</button>
+        <button class="tab" onclick="showTab('quarterly')">Q1 vs Q2 Comparison</button>
+      </div>
+
+      <!-- Monthly Tab -->
+      <div id="monthly" class="tab-content active">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>April</th>
+              <th>May</th>
+              <th>June</th>
+              <th>July</th>
+              <th>Trend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Headline ScaleUp (All Types, p80)</strong></td>
+              <td>11m 13s</td>
+              <td>10m 14s</td>
+              <td>10m 7s</td>
+              <td>9m 36s</td>
+              <td><span class="trend-down">↓</span> <span class="delta improvement">-1m 37s</span></td>
+            </tr>
+            <tr>
+              <td><strong>ScaleUp: Release (7d, p80)</strong></td>
+              <td>12m 47s</td>
+              <td>14m 41s</td>
+              <td>15m 0s</td>
+              <td>15m 15s</td>
+              <td><span class="trend-up">↑</span> <span class="delta degradation">+2m 28s</span></td>
+            </tr>
+            <tr>
+              <td><strong>ScaleUp: Non-Release (7d, p80)</strong></td>
+              <td>10m 23s</td>
+              <td>9m 24s</td>
+              <td>8m 47s</td>
+              <td>8m 22s</td>
+              <td><span class="trend-down">↓</span> <span class="delta improvement">-2m 1s</span></td>
+            </tr>
+            <tr>
+              <td><strong>Core App Startup Hyperforce (p80)</strong></td>
+              <td>4m 43s</td>
+              <td>4m 52s</td>
+              <td colspan="2" style="background: #fff3cd; color: #7D6608;">Replaced with per-release per-mode metric</td>
+              <td><span class="trend-neutral">—</span></td>
+            </tr>
+            <tr>
+              <td><strong>Core App Startup (prod, new codeline, p80)</strong></td>
+              <td>4m 43s</td>
+              <td>4m 41s</td>
+              <td colspan="2" style="background: #fff3cd; color: #7D6608;">Replaced with per-release per-mode metric</td>
+              <td><span class="trend-neutral">—</span></td>
+            </tr>
+            <tr>
+              <td><strong>Core App Startup Hyperforce (preprod, p80)</strong></td>
+              <td>6m 8s</td>
+              <td>7m 0s</td>
+              <td>—</td>
+              <td>5m 40s</td>
+              <td><span class="trend-down">↓</span> <span class="delta improvement">-28s</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Quarterly Tab -->
+      <div id="quarterly" class="tab-content">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>April</th>
+              <th>Q2 (Apr-Jun) Avg</th>
+              <th>July</th>
+              <th>Apr→Jul Change</th>
+              <th>% Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Headline ScaleUp (All Types, p80)</strong></td>
+              <td>11m 13s (673s)</td>
+              <td>10m 31s (631s)</td>
+              <td>9m 36s (576s)</td>
+              <td><span class="delta improvement">-97s (-14.4%)</span></td>
+              <td style="color: var(--green-text); font-weight: 700;">-14.4%</td>
+            </tr>
+            <tr>
+              <td><strong>ScaleUp: Release (7d, p80)</strong></td>
+              <td>12m 47s (767s)</td>
+              <td>14m 9s (849s)</td>
+              <td>15m 15s (915s)</td>
+              <td><span class="delta degradation">+148s (+19.3%)</span></td>
+              <td style="color: var(--red-text); font-weight: 700;">+19.3%</td>
+            </tr>
+            <tr>
+              <td><strong>ScaleUp: Non-Release (7d, p80)</strong></td>
+              <td>10m 23s (623s)</td>
+              <td>9m 31s (571s)</td>
+              <td>8m 22s (502s)</td>
+              <td><span class="delta improvement">-121s (-19.4%)</span></td>
+              <td style="color: var(--green-text); font-weight: 700;">-19.4%</td>
+            </tr>
+            <tr>
+              <td><strong>Core App Startup Hyperforce (preprod, p80)</strong></td>
+              <td>6m 8s (368s)</td>
+              <td>6m 34s (394s)</td>
+              <td>5m 40s (340s)</td>
+              <td><span class="delta improvement">-28s (-7.6%)</span></td>
+              <td style="color: var(--green-text); font-weight: 700;">-7.6%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          <strong>💡 Note:</strong> Percentages calculated using seconds for accuracy. Positive percentages indicate degradation (longer times), negative percentages indicate improvement (shorter times).
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION 3: Highlights & Observations -->
+  <div class="section">
+    <div class="section-header">💡 Highlights & Observations</div>
+    <div class="section-body">
+
+      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+
+        <!-- LEFT: Positive improvements & observations -->
+        <div style="flex: 1; min-width: 300px;">
+          <div class="col-label" style="color: var(--green-text); background: var(--green);">✅ Improvements &amp; Positive Observations</div>
+          <div class="highlights">
+
+            <div class="highlight-card improvement">
+              <div class="highlight-title">
+                <span class="highlight-icon">✅</span>
+                <span>Strong Improvement: Headline ScaleUp Time</span>
+              </div>
+              <div class="highlight-desc">
+                The overall <span class="highlight-metric">Headline ScaleUp time improved by 14.4%</span> from April (11m 13s) to July (9m 36s), saving 1 minute 37 seconds.
+                <br><br>
+                <strong>Reason:</strong> This improvement is primarily driven by significant gains in non-release scaleups, which make up the majority of scaleup activity (~83% based on release percentage tracking). The consistent month-over-month reduction suggests infrastructure optimizations and improved caching strategies are having a positive impact.
+                <br><br>
+                <strong>Gap to Target:</strong> Still 3m 36s above the 6-minute target, requiring continued focus on optimization efforts.
+              </div>
+            </div>
+
+            <div class="highlight-card improvement">
+              <div class="highlight-title">
+                <span class="highlight-icon">✅</span>
+                <span>Significant Improvement: Non-Release ScaleUp Time</span>
+              </div>
+              <div class="highlight-desc">
+                Non-release scaleups showed <span class="highlight-metric">19.4% improvement</span> from April (10m 23s) to July (8m 22s), reducing time by 2 minutes 1 second.
+                <br><br>
+                <strong>Reason:</strong> Likely due to improved image caching (cache hit rate increased from 56% in April to 81% in July), image download optimizations, and infrastructure improvements. Non-release scaleups benefit more from caching since they don't require new image downloads as frequently.
+              </div>
+            </div>
+
+            <div class="highlight-card improvement">
+              <div class="highlight-title">
+                <span class="highlight-icon">✅</span>
+                <span>Improvement: Core App Startup Hyperforce (Preprod)</span>
+              </div>
+              <div class="highlight-desc">
+                Preprod startup time improved by <span class="highlight-metric">7.6%</span> from April (6m 8s) to July (5m 40s).
+                <br><br>
+                <strong>Reason:</strong> The preprod environment shows more consistent improvement patterns, likely benefiting from staging infrastructure optimizations before they reach production. The reduction suggests code and infrastructure changes are being validated effectively in preprod.
+              </div>
+            </div>
+
+            <div class="highlight-card improvement">
+              <div class="highlight-title">
+                <span class="highlight-icon">📊</span>
+                <span>Observation: Image Cache Hit Rate Improvement</span>
+              </div>
+              <div class="highlight-desc">
+                Image cache hit rate improved significantly from <span class="highlight-metric">56% in April to 81% in July</span> (+45% relative improvement).
+                <br><br>
+                This correlates directly with the non-release scaleup improvements and suggests that caching strategies are working effectively. The higher cache hit rate reduces the need for image downloads, which historically take 2-3 minutes per scaleup.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- RIGHT: Degradations & negative observations -->
+        <div style="flex: 1; min-width: 300px;">
+          <div class="col-label" style="color: var(--red-text); background: var(--red);">⚠️ Degradations &amp; Areas of Concern</div>
+          <div class="highlights">
+
+            <div class="highlight-card degradation">
+              <div class="highlight-title">
+                <span class="highlight-icon">⚠️</span>
+                <span>Degradation: Release ScaleUp Time</span>
+              </div>
+              <div class="highlight-desc">
+                Release scaleups showed <span class="highlight-metric">19.3% degradation</span> from April (12m 47s) to July (15m 15s), increasing by 2 minutes 28 seconds.
+                <br><br>
+                <strong>Reason:</strong> Release scaleups are trending upward consistently over the 4-month period. Potential causes include:
+                <ul style="margin-top: 8px; padding-left: 20px;">
+                  <li>Increasing image sizes (20.52GB in July vs 19.2GB in April - 6.9% increase)</li>
+                  <li>More complex release procedures or additional validation steps</li>
+                  <li>Network or infrastructure bottlenecks during release windows</li>
+                  <li>Increased number of release-related init containers or startup tasks</li>
+                </ul>
+                <br>
+                <strong>Action Required:</strong> Investigate release-specific bottlenecks and consider optimizing release image sizes and deployment procedures.
+                <br><br>
+                <strong style="color: var(--green-text);">🟢 Path to Green:</strong>
+                <ul style="margin-top: 8px; padding-left: 20px;">
+                  <li>Propose a joint release-time App Startup SLA metric with the Apex team (ref. M4.2.3 App Startup PTG) to align ownership of the ApexPrecompilation warmer root cause.</li>
+                  <li>CASAM 266 POCs to take Apex pre-compilation out of the app-startup critical path (or accelerate it with more efficient instance types).</li>
+                  <li>Complete rollout of the AWS SOCI snapshotter (targeted for 266) to lazy-load image layers and cut download time.</li>
+                  <li>Complete remaining CDS (Class Data Sharing) dev, testing, and enablement (targeted for 266) — early results show ~30s startup savings.</li>
+                  <li>Sustain Keymaker client + madkub-init rollout, already delivering 50–60s of scale-up time savings.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="highlight-card degradation">
+              <div class="highlight-title">
+                <span class="highlight-icon">📊</span>
+                <span>Observation: Image Size Growth</span>
+              </div>
+              <div class="highlight-desc">
+                CASAM image size increased from <span class="highlight-metric">19.2GB in April to 20.52GB in July</span> (+6.9% growth).
+                <br><br>
+                This steady growth in image size may be contributing to the release scaleup degradation and needs monitoring. Consider implementing image size controls or optimization strategies to prevent further growth.
+                <br><br>
+                <strong style="color: var(--green-text);">🟢 Path to Green:</strong>
+                <ul style="margin-top: 8px; padding-left: 20px;">
+                  <li>Roll out the AWS SOCI snapshotter (targeted for 266) so pods lazy-load only the image layers they need instead of pulling the full ~20GB image.</li>
+                  <li>Enable CDS (Class Data Sharing) builds running in parallel with autobuild to reduce startup work tied to image contents.</li>
+                  <li>Establish per-release image-size tracking and a growth budget/threshold, with alerts when the CASAM main_producer image trends upward.</li>
+                  <li>Partner with contributing teams to prune unused dependencies and artifacts from the main_producer image.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(tabName) {
+  // Hide all tab contents
+  const contents = document.querySelectorAll('.tab-content');
+  contents.forEach(content => content.classList.remove('active'));
+
+  // Remove active class from all tabs
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => tab.classList.remove('active'));
+
+  // Show selected tab content
+  document.getElementById(tabName).classList.add('active');
+
+  // Add active class to clicked tab
+  event.target.classList.add('active');
+}
+
+function toggleSection(header) {
+  header.classList.toggle('collapsed');
+}
+</script>
+
+</body>
+</html>
