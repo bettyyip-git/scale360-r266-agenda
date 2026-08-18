@@ -351,7 +351,7 @@
   }
 
   .highlight-desc {
-    font-size: 0.88rem;
+    font-size: 1rem;
     line-height: 1.7;
     color: #222;
   }
@@ -447,61 +447,109 @@
   <div class="section">
     <div class="section-header">⚡ TL/DR; HIGHLIGHTS</div>
     <div class="section-body">
-      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
 
-        <!-- TL/DR Highlights (left, narrower) -->
-        <div style="flex: 1; min-width: 300px; max-width: 55%;">
-          <div class="highlights">
-            <div class="highlight-card degradation">
-              <div class="highlight-title">
-                <span class="highlight-icon">🚀</span>
-                <span>Release Time, Startup Performance &amp; Scale-Up&nbsp;&nbsp;|&nbsp;&nbsp;Status: 🔴</span>
-              </div>
-              <div class="highlight-desc">
-                <strong>Release Time and Startup Performance:</strong> The release time app startup is currently not meeting the nine-minute target due to dependencies on Apex pre-compilation. Efforts are underway to remove pre-compilation from the critical path, with 266 pilot concepts being evaluated to improve startup speeds. Recent successes include a successful emergency capacity release completed in under three hours.
-                <br><br>
-                <strong>Scale-Up Efficiency:</strong> The team achieved one minute of savings in scale-up time through efficiencies in init containers and successfully rolled out the SOCI snapshotter to speed up image downloads.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Performance Targets At Risk (right) -->
-        <div style="flex: 1; min-width: 280px;">
-          <div style="background: linear-gradient(160deg, #fff 0%, #fde6e9 130%); border: 1px solid rgba(156,0,6,0.18); border-left: 5px solid var(--red-text); border-radius: 10px; padding: 16px 18px; box-shadow: var(--shadow-sm);">
-            <div style="font-weight: 700; font-size: 1.02rem; color: var(--navy); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-              <span style="font-size: 1.2rem;">🚨</span> Performance Targets At Risk
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.82rem;">
-              <div style="padding: 8px 10px; background: rgba(255,199,206,0.35); border-radius: 6px; border-left: 3px solid var(--red-text);">
-                <strong>Headline ScaleUp (All Types)</strong><br>
-                🔴 9m 36s — Target: 6m 0s <span style="color: var(--red-text); font-weight:700;">(+3m 36s gap)</span>
-              </div>
-              <div style="padding: 8px 10px; background: rgba(255,199,206,0.35); border-radius: 6px; border-left: 3px solid var(--red-text);">
-                <strong>Core App Scale-Up (release)</strong><br>
-                🔴 15m 15s — Target: ≤ 9 min <span style="color: var(--red-text); font-weight:700;">(+6m 15s gap)</span>
-              </div>
-              <div style="padding: 8px 10px; background: rgba(255,199,206,0.35); border-radius: 6px; border-left: 3px solid var(--red-text);">
-                <strong>Core App Startup Hyperforce — Release (p80)</strong><br>
-                🔴 14m 39s / 13m 32s — Target: ≤ 9 min <span style="color: var(--red-text); font-weight:700;">(+5m 39s / +4m 32s)</span>
-              </div>
-              <div style="padding: 8px 10px; background: rgba(255,199,206,0.35); border-radius: 6px; border-left: 3px solid var(--red-text);">
-                <strong>Core App Startup Hyperforce — Peak Release (p80)</strong><br>
-                🔴 10m 4s / 11m 39s — Target: ≤ 9 min <span style="color: var(--red-text); font-weight:700;">(+1m 4s / +2m 39s)</span>
-              </div>
-              <div style="padding: 8px 10px; background: rgba(255,235,156,0.35); border-radius: 6px; border-left: 3px solid var(--yellow-text);">
-                <strong>Core App Scale-Up (non-release HPA)</strong><br>
-                🟡 8m 22s — Target: ≤ 7 min <span style="color: var(--yellow-text); font-weight:700;">(+1m 22s gap)</span>
-              </div>
-              <div style="padding: 8px 10px; background: rgba(255,235,156,0.35); border-radius: 6px; border-left: 3px solid var(--yellow-text);">
-                <strong>Core App Startup Hyperforce — Other (p80)</strong><br>
-                🟡 4m 51s / 4m 43s — Target: ≤ 4 min <span style="color: var(--yellow-text); font-weight:700;">(+51s / +43s)</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <!-- Highlights -->
+      <div style="font-size: 0.95rem; line-height: 1.5; color: #222; margin-bottom: 18px;">
+        <div style="font-weight: 700; color: var(--navy); margin-bottom: 8px; font-size: 0.95rem;">🚀 Release Time, Startup Performance &amp; Scale-Up&nbsp;&nbsp;|&nbsp;&nbsp;Status: 🔴</div>
+        <ul style="margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px;">
+          <li>Release time app startup <strong>not meeting 9-min target</strong> due to Apex pre-compilation dependency. Efforts underway to remove pre-compilation from critical path; 266 pilot concepts being evaluated.</li>
+          <li style="color: var(--green-text);">✅ Emergency capacity release completed successfully in <strong>under 3 hours</strong>.</li>
+          <li style="color: var(--green-text);">✅ Scale-up time reduced by <strong>1 minute</strong> via init container efficiencies + SOCI snapshotter rollout for faster image downloads.</li>
+        </ul>
       </div>
+
+      <!-- Performance Targets At Risk -->
+      <div style="border-top: 1px solid var(--border); padding-top: 16px;">
+        <div style="font-weight: 700; font-size: 1.02rem; color: var(--navy); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 1.2rem;">🚨</span> Performance Targets At Risk (July 2026)
+        </div>
+        <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+
+          <!-- Scale-Up Metrics -->
+          <div style="flex: 1; min-width: 300px;">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">⚙️ Scale-Up</div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem;">
+
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="flex: 0 0 160px; font-weight: 600; color: var(--navy);">Headline (All Types)</div>
+                <div style="flex: 1; max-width: 280px; position: relative; height: 24px; background: #e8f5e9; border-radius: 4px;">
+                  <div style="position: absolute; left: 0; top: 0; height: 100%; width: 62.5%; background: #c8e6c9; border-radius: 4px 0 0 4px; border-right: 2px dashed var(--green-text);"></div>
+                  <div style="position: absolute; left: 62.5%; top: 0; height: 100%; width: 37.5%; background: linear-gradient(90deg, #ffcdd2, #ef9a9a); border-radius: 0 4px 4px 0;"></div>
+                  <span style="position: absolute; left: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 600; color: var(--green-text);">6m</span>
+                  <span style="position: absolute; right: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 700; color: var(--red-text);">9m 36s</span>
+                </div>
+                <div style="flex: 0 0 60px; text-align: right; font-weight: 800; color: var(--red-text);">+3m 36s</div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="flex: 0 0 160px; font-weight: 600; color: var(--navy);">Release</div>
+                <div style="flex: 1; max-width: 280px; position: relative; height: 24px; background: #e8f5e9; border-radius: 4px;">
+                  <div style="position: absolute; left: 0; top: 0; height: 100%; width: 59%; background: #c8e6c9; border-radius: 4px 0 0 4px; border-right: 2px dashed var(--green-text);"></div>
+                  <div style="position: absolute; left: 59%; top: 0; height: 100%; width: 41%; background: linear-gradient(90deg, #ffcdd2, #ef9a9a); border-radius: 0 4px 4px 0;"></div>
+                  <span style="position: absolute; left: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 600; color: var(--green-text);">9m</span>
+                  <span style="position: absolute; right: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 700; color: var(--red-text);">15m 15s</span>
+                </div>
+                <div style="flex: 0 0 60px; text-align: right; font-weight: 800; color: var(--red-text);">+6m 15s</div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="flex: 0 0 160px; font-weight: 600; color: var(--navy);">Non-release HPA</div>
+                <div style="flex: 1; max-width: 280px; position: relative; height: 24px; background: #e8f5e9; border-radius: 4px;">
+                  <div style="position: absolute; left: 0; top: 0; height: 100%; width: 84%; background: #c8e6c9; border-radius: 4px 0 0 4px; border-right: 2px dashed var(--green-text);"></div>
+                  <div style="position: absolute; left: 84%; top: 0; height: 100%; width: 16%; background: linear-gradient(90deg, #fff9c4, #fff176); border-radius: 0 4px 4px 0;"></div>
+                  <span style="position: absolute; left: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 600; color: var(--green-text);">7m</span>
+                  <span style="position: absolute; right: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 700; color: var(--yellow-text);">8m 22s</span>
+                </div>
+                <div style="flex: 0 0 60px; text-align: right; font-weight: 800; color: var(--yellow-text);">+1m 22s</div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Startup Metrics -->
+          <div style="flex: 1; min-width: 300px;">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">🚀 Core App Startup (p80)</div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem;">
+
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="flex: 0 0 160px; font-weight: 600; color: var(--navy);">HF — Release</div>
+                <div style="flex: 1; max-width: 280px; position: relative; height: 24px; background: #e8f5e9; border-radius: 4px;">
+                  <div style="position: absolute; left: 0; top: 0; height: 100%; width: 61%; background: #c8e6c9; border-radius: 4px 0 0 4px; border-right: 2px dashed var(--green-text);"></div>
+                  <div style="position: absolute; left: 61%; top: 0; height: 100%; width: 39%; background: linear-gradient(90deg, #ffcdd2, #ef9a9a); border-radius: 0 4px 4px 0;"></div>
+                  <span style="position: absolute; left: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 600; color: var(--green-text);">9m</span>
+                  <span style="position: absolute; right: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 700; color: var(--red-text);">14m 39s</span>
+                </div>
+                <div style="flex: 0 0 60px; text-align: right; font-weight: 800; color: var(--red-text);">+5m 39s</div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="flex: 0 0 160px; font-weight: 600; color: var(--navy);">HF — Peak Release</div>
+                <div style="flex: 1; max-width: 280px; position: relative; height: 24px; background: #e8f5e9; border-radius: 4px;">
+                  <div style="position: absolute; left: 0; top: 0; height: 100%; width: 77%; background: #c8e6c9; border-radius: 4px 0 0 4px; border-right: 2px dashed var(--green-text);"></div>
+                  <div style="position: absolute; left: 77%; top: 0; height: 100%; width: 23%; background: linear-gradient(90deg, #ffcdd2, #ef9a9a); border-radius: 0 4px 4px 0;"></div>
+                  <span style="position: absolute; left: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 600; color: var(--green-text);">9m</span>
+                  <span style="position: absolute; right: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 700; color: var(--red-text);">11m 39s</span>
+                </div>
+                <div style="flex: 0 0 60px; text-align: right; font-weight: 800; color: var(--red-text);">+2m 39s</div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="flex: 0 0 160px; font-weight: 600; color: var(--navy);">HF — Other</div>
+                <div style="flex: 1; max-width: 280px; position: relative; height: 24px; background: #e8f5e9; border-radius: 4px;">
+                  <div style="position: absolute; left: 0; top: 0; height: 100%; width: 82%; background: #c8e6c9; border-radius: 4px 0 0 4px; border-right: 2px dashed var(--green-text);"></div>
+                  <div style="position: absolute; left: 82%; top: 0; height: 100%; width: 18%; background: linear-gradient(90deg, #fff9c4, #fff176); border-radius: 0 4px 4px 0;"></div>
+                  <span style="position: absolute; left: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 600; color: var(--green-text);">4m</span>
+                  <span style="position: absolute; right: 3px; top: 50%; transform: translateY(-50%); font-size: 0.6rem; font-weight: 700; color: var(--yellow-text);">4m 51s</span>
+                </div>
+                <div style="flex: 0 0 60px; text-align: right; font-weight: 800; color: var(--yellow-text);">+51s</div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -592,137 +640,6 @@
 
       <div class="note">
         <strong>📝 Note:</strong> Core App Startup Hyperforce (main-2/main-4) and Core App Startup (prod, new codeline) metrics were replaced with per-release per-mode startup time starting in June 2026.
-      </div>
-
-    </div>
-  </div>
-
-  <!-- SECTION 2: April-July Metrics & Comparisons -->
-  <div class="section">
-    <div class="section-header collapsible" onclick="toggleSection(this)"><span>📈 Q2 and MoM Metrics &amp; Trends</span><span class="chevron">▼</span></div>
-    <div class="section-body">
-
-      <div class="tabs">
-        <button class="tab active" onclick="showTab('monthly')">Monthly View</button>
-        <button class="tab" onclick="showTab('quarterly')">Q1 vs Q2 Comparison</button>
-      </div>
-
-      <!-- Monthly Tab -->
-      <div id="monthly" class="tab-content active">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>Metric</th>
-              <th>April</th>
-              <th>May</th>
-              <th>June</th>
-              <th>July</th>
-              <th>Trend</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Headline ScaleUp (All Types, p80)</strong></td>
-              <td>11m 13s</td>
-              <td>10m 14s</td>
-              <td>10m 7s</td>
-              <td>9m 36s</td>
-              <td><span class="trend-down">↓</span> <span class="delta improvement">-1m 37s</span></td>
-            </tr>
-            <tr>
-              <td><strong>ScaleUp: Release (7d, p80)</strong></td>
-              <td>12m 47s</td>
-              <td>14m 41s</td>
-              <td>15m 0s</td>
-              <td>15m 15s</td>
-              <td><span class="trend-up">↑</span> <span class="delta degradation">+2m 28s</span></td>
-            </tr>
-            <tr>
-              <td><strong>ScaleUp: Non-Release (7d, p80)</strong></td>
-              <td>10m 23s</td>
-              <td>9m 24s</td>
-              <td>8m 47s</td>
-              <td>8m 22s</td>
-              <td><span class="trend-down">↓</span> <span class="delta improvement">-2m 1s</span></td>
-            </tr>
-            <tr>
-              <td><strong>Core App Startup Hyperforce (p80)</strong></td>
-              <td>4m 43s</td>
-              <td>4m 52s</td>
-              <td colspan="2" style="background: #fff3cd; color: #7D6608;">Replaced with per-release per-mode metric</td>
-              <td><span class="trend-neutral">—</span></td>
-            </tr>
-            <tr>
-              <td><strong>Core App Startup (prod, new codeline, p80)</strong></td>
-              <td>4m 43s</td>
-              <td>4m 41s</td>
-              <td colspan="2" style="background: #fff3cd; color: #7D6608;">Replaced with per-release per-mode metric</td>
-              <td><span class="trend-neutral">—</span></td>
-            </tr>
-            <tr>
-              <td><strong>Core App Startup Hyperforce (preprod, p80)</strong></td>
-              <td>6m 8s</td>
-              <td>7m 0s</td>
-              <td>—</td>
-              <td>5m 40s</td>
-              <td><span class="trend-down">↓</span> <span class="delta improvement">-28s</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Quarterly Tab -->
-      <div id="quarterly" class="tab-content">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>Metric</th>
-              <th>April</th>
-              <th>Q2 (Apr-Jun) Avg</th>
-              <th>July</th>
-              <th>Apr→Jul Change</th>
-              <th>% Change</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Headline ScaleUp (All Types, p80)</strong></td>
-              <td>11m 13s (673s)</td>
-              <td>10m 31s (631s)</td>
-              <td>9m 36s (576s)</td>
-              <td><span class="delta improvement">-97s (-14.4%)</span></td>
-              <td style="color: var(--green-text); font-weight: 700;">-14.4%</td>
-            </tr>
-            <tr>
-              <td><strong>ScaleUp: Release (7d, p80)</strong></td>
-              <td>12m 47s (767s)</td>
-              <td>14m 9s (849s)</td>
-              <td>15m 15s (915s)</td>
-              <td><span class="delta degradation">+148s (+19.3%)</span></td>
-              <td style="color: var(--red-text); font-weight: 700;">+19.3%</td>
-            </tr>
-            <tr>
-              <td><strong>ScaleUp: Non-Release (7d, p80)</strong></td>
-              <td>10m 23s (623s)</td>
-              <td>9m 31s (571s)</td>
-              <td>8m 22s (502s)</td>
-              <td><span class="delta improvement">-121s (-19.4%)</span></td>
-              <td style="color: var(--green-text); font-weight: 700;">-19.4%</td>
-            </tr>
-            <tr>
-              <td><strong>Core App Startup Hyperforce (preprod, p80)</strong></td>
-              <td>6m 8s (368s)</td>
-              <td>6m 34s (394s)</td>
-              <td>5m 40s (340s)</td>
-              <td><span class="delta improvement">-28s (-7.6%)</span></td>
-              <td style="color: var(--green-text); font-weight: 700;">-7.6%</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="note">
-          <strong>💡 Note:</strong> Percentages calculated using seconds for accuracy. Positive percentages indicate degradation (longer times), negative percentages indicate improvement (shorter times).
-        </div>
       </div>
 
     </div>
@@ -850,6 +767,137 @@
           </div>
         </div>
 
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION: April-July Metrics & Comparisons -->
+  <div class="section">
+    <div class="section-header collapsible" onclick="toggleSection(this)"><span>📈 Q2 and MoM Metrics &amp; Trends</span><span class="chevron">▼</span></div>
+    <div class="section-body">
+
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('monthly')">Monthly View</button>
+        <button class="tab" onclick="showTab('quarterly')">Q1 vs Q2 Comparison</button>
+      </div>
+
+      <!-- Monthly Tab -->
+      <div id="monthly" class="tab-content active">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>April</th>
+              <th>May</th>
+              <th>June</th>
+              <th>July</th>
+              <th>Trend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Headline ScaleUp (All Types, p80)</strong></td>
+              <td>11m 13s</td>
+              <td>10m 14s</td>
+              <td>10m 7s</td>
+              <td>9m 36s</td>
+              <td><span class="trend-down">↓</span> <span class="delta improvement">-1m 37s</span></td>
+            </tr>
+            <tr>
+              <td><strong>ScaleUp: Release (7d, p80)</strong></td>
+              <td>12m 47s</td>
+              <td>14m 41s</td>
+              <td>15m 0s</td>
+              <td>15m 15s</td>
+              <td><span class="trend-up">↑</span> <span class="delta degradation">+2m 28s</span></td>
+            </tr>
+            <tr>
+              <td><strong>ScaleUp: Non-Release (7d, p80)</strong></td>
+              <td>10m 23s</td>
+              <td>9m 24s</td>
+              <td>8m 47s</td>
+              <td>8m 22s</td>
+              <td><span class="trend-down">↓</span> <span class="delta improvement">-2m 1s</span></td>
+            </tr>
+            <tr>
+              <td><strong>Core App Startup Hyperforce (p80)</strong></td>
+              <td>4m 43s</td>
+              <td>4m 52s</td>
+              <td colspan="2" style="background: #fff3cd; color: #7D6608;">Replaced with per-release per-mode metric</td>
+              <td><span class="trend-neutral">—</span></td>
+            </tr>
+            <tr>
+              <td><strong>Core App Startup (prod, new codeline, p80)</strong></td>
+              <td>4m 43s</td>
+              <td>4m 41s</td>
+              <td colspan="2" style="background: #fff3cd; color: #7D6608;">Replaced with per-release per-mode metric</td>
+              <td><span class="trend-neutral">—</span></td>
+            </tr>
+            <tr>
+              <td><strong>Core App Startup Hyperforce (preprod, p80)</strong></td>
+              <td>6m 8s</td>
+              <td>7m 0s</td>
+              <td>—</td>
+              <td>5m 40s</td>
+              <td><span class="trend-down">↓</span> <span class="delta improvement">-28s</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Quarterly Tab -->
+      <div id="quarterly" class="tab-content">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>April</th>
+              <th>Q2 (Apr-Jun) Avg</th>
+              <th>July</th>
+              <th>Apr→Jul Change</th>
+              <th>% Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Headline ScaleUp (All Types, p80)</strong></td>
+              <td>11m 13s (673s)</td>
+              <td>10m 31s (631s)</td>
+              <td>9m 36s (576s)</td>
+              <td><span class="delta improvement">-97s (-14.4%)</span></td>
+              <td style="color: var(--green-text); font-weight: 700;">-14.4%</td>
+            </tr>
+            <tr>
+              <td><strong>ScaleUp: Release (7d, p80)</strong></td>
+              <td>12m 47s (767s)</td>
+              <td>14m 9s (849s)</td>
+              <td>15m 15s (915s)</td>
+              <td><span class="delta degradation">+148s (+19.3%)</span></td>
+              <td style="color: var(--red-text); font-weight: 700;">+19.3%</td>
+            </tr>
+            <tr>
+              <td><strong>ScaleUp: Non-Release (7d, p80)</strong></td>
+              <td>10m 23s (623s)</td>
+              <td>9m 31s (571s)</td>
+              <td>8m 22s (502s)</td>
+              <td><span class="delta improvement">-121s (-19.4%)</span></td>
+              <td style="color: var(--green-text); font-weight: 700;">-19.4%</td>
+            </tr>
+            <tr>
+              <td><strong>Core App Startup Hyperforce (preprod, p80)</strong></td>
+              <td>6m 8s (368s)</td>
+              <td>6m 34s (394s)</td>
+              <td>5m 40s (340s)</td>
+              <td><span class="delta improvement">-28s (-7.6%)</span></td>
+              <td style="color: var(--green-text); font-weight: 700;">-7.6%</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note">
+          <strong>💡 Note:</strong> Percentages calculated using seconds for accuracy. Positive percentages indicate degradation (longer times), negative percentages indicate improvement (shorter times).
+        </div>
       </div>
 
     </div>
