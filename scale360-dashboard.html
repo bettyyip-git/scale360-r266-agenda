@@ -493,6 +493,26 @@ body {
   pointer-events: none;
 }
 
+.milestone-comment {
+  width: 100%;
+  min-width: 200px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--text-primary);
+  background: var(--surface-2);
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.milestone-comment:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--surface-1);
+}
+
 @media (max-width: 768px) {
   .grid { grid-template-columns: 1fr; }
   .header { flex-direction: column; gap: 12px; align-items: flex-start; }
@@ -950,6 +970,65 @@ body {
       <a href="https://docs.google.com/spreadsheets/d/1TO5rRuNBsOLEJlqVZCSSuAsrHXbGNYNiLIWJTFvEyUo/edit?gid=2119001508#gid=2119001508" target="_blank">Work Streams</a> tab.
       Currently showing placeholder data.
     </div>
+  </div>
+
+  <!-- Milestones -->
+  <div class="card card-full" style="margin-top:12px;">
+    <h2><span class="icon">&#128197;</span> Key Milestones</h2>
+    <table class="ws-table">
+      <thead>
+        <tr>
+          <th style="width:180px;">Date</th>
+          <th style="width:240px;">Milestone</th>
+          <th style="width:90px;">Status</th>
+          <th>Highlights / Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Aug 24, 2026</strong></td>
+          <td>All PRDs completed</td>
+          <td><span class="status-dot yellow" style="display:inline-block;margin-right:6px;"></span> In Progress</td>
+          <td><textarea class="milestone-comment" placeholder="Add highlights..." rows="2"></textarea></td>
+        </tr>
+        <tr>
+          <td><strong>Sep 10, 2026</strong></td>
+          <td>Internal Demo</td>
+          <td><span class="status-dot" style="display:inline-block;margin-right:6px;background:var(--text-muted);"></span> Upcoming</td>
+          <td><textarea class="milestone-comment" placeholder="Add highlights..." rows="2"></textarea></td>
+        </tr>
+        <tr>
+          <td><strong>Oct 19, 2026</strong></td>
+          <td>UAT</td>
+          <td><span class="status-dot" style="display:inline-block;margin-right:6px;background:var(--text-muted);"></span> Upcoming</td>
+          <td><textarea class="milestone-comment" placeholder="Add highlights..." rows="2"></textarea></td>
+        </tr>
+        <tr>
+          <td><strong>Nov 30 – Dec 11, 2026</strong></td>
+          <td>Customer Pilot</td>
+          <td><span class="status-dot" style="display:inline-block;margin-right:6px;background:var(--text-muted);"></span> Upcoming</td>
+          <td><textarea class="milestone-comment" placeholder="Add highlights..." rows="2"></textarea></td>
+        </tr>
+        <tr>
+          <td><strong>Feb 15, 2027</strong></td>
+          <td>MLP GA</td>
+          <td><span class="status-dot" style="display:inline-block;margin-right:6px;background:var(--text-muted);"></span> Upcoming</td>
+          <td><textarea class="milestone-comment" placeholder="Add highlights..." rows="2"></textarea></td>
+        </tr>
+        <tr>
+          <td><strong>Mar 1, 2027</strong></td>
+          <td>Prep &amp; Demo Deadline for TDX</td>
+          <td><span class="status-dot" style="display:inline-block;margin-right:6px;background:var(--text-muted);"></span> Upcoming</td>
+          <td><textarea class="milestone-comment" placeholder="Add highlights..." rows="2"></textarea></td>
+        </tr>
+        <tr>
+          <td><strong>Mar 10, 2027</strong></td>
+          <td>TDX</td>
+          <td><span class="status-dot" style="display:inline-block;margin-right:6px;background:var(--text-muted);"></span> Upcoming</td>
+          <td><textarea class="milestone-comment" placeholder="Add highlights..." rows="2"></textarea></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
