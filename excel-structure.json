@@ -1,0 +1,88 @@
+{
+  "Agenda Data": {
+    "rows": 129,
+    "columns": 14,
+    "headers": [
+      "Sheet/Tab Name",
+      "Section",
+      "Row Number",
+      "Time",
+      "Duration",
+      "Title/Topic",
+      "Facilitator/Owner",
+      "Description/Goals",
+      "Product Tags",
+      "Links/Artifacts",
+      "HTML ID",
+      "HTML Class",
+      "HTML Parent Structure",
+      "Additional Notes"
+    ],
+    "sample_data": [
+      [
+        "Overview",
+        "Workshop Overview",
+        "1",
+        null,
+        null,
+        "3 Planning Days",
+        null,
+        null,
+        null,
+        null,
+        "#overview > .card > .overview-grid > .kpi-card",
+        "kpi-card",
+        ".card > .overview-grid",
+        "KPI stat"
+      ],
+      [
+        "Overview",
+        "Workshop Overview",
+        "2",
+        null,
+        null,
+        "11 Topics",
+        null,
+        null,
+        null,
+        null,
+        "#overview > .card > .overview-grid > .kpi-card",
+        "kpi-card",
+        ".card > .overview-grid",
+        "KPI stat"
+      ],
+      [
+        "Overview",
+        "Workshop Overview",
+        "3",
+        null,
+        null,
+        "Sep 15 2026 Dreamforce Target",
+        null,
+        null,
+        null,
+        null,
+        "#overview > .card > .overview-grid > .kpi-card",
+        "kpi-card",
+        ".card > .overview-grid",
+        "KPI stat"
+      ],
+      [
+        "Overview",
+        "Workshop Overview",
+        "4",
+        null,
+        null,
+        "76 Days to Dreamforce",
+        null,
+        null,
+        null,
+        null,
+        "#overview > .card > .overview-grid > .kpi-card",
+        "kpi-card",
+        ".card > .overview-grid",
+        "KPI stat with countdown ID=dfCountdown"
+      ]
+    ]
+  }
+}
